@@ -7,7 +7,6 @@ package forme;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -26,13 +25,14 @@ import kontrolor.KontrolerLogIn;
 public class MasterForma extends javax.swing.JDialog {
 
     private static MasterForma instance;
-    public static MasterForma getInstance(){
+
+    public static MasterForma getInstance() {
         if (instance == null) {
             instance = new MasterForma(new javax.swing.JFrame(), true);
         }
         return instance;
     }
-    
+
     /**
      * Creates new form MasterForma
      */
@@ -40,10 +40,11 @@ public class MasterForma extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
+
     private JPanel createBackgroundPanel() {
         return new JPanel() {
             BufferedImage image = null;
+
             {
                 try {
                     image = ImageIO.read(getClass().getResource("mainMenu.jpg"));
@@ -51,18 +52,20 @@ public class MasterForma extends javax.swing.JDialog {
                     Logger.getLogger(TestBackgroundResize.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
             }
-            
+
             @Override
             public Dimension getPreferredSize() {
                 return new Dimension(500, 500);
             }
         };
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,7 +75,7 @@ public class MasterForma extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
+        menuBar = new javax.swing.JMenuBar();
         AdministracijaTimova = new javax.swing.JMenu();
         UnosTimova = new javax.swing.JMenuItem();
         IzmenaTimova = new javax.swing.JMenuItem();
@@ -84,12 +87,14 @@ public class MasterForma extends javax.swing.JDialog {
         BrisanjeTurnira = new javax.swing.JMenuItem();
         IzmenaTurnira = new javax.swing.JMenuItem();
         UnosRezultata = new javax.swing.JMenu();
+        Unos = new javax.swing.JMenuItem();
         OAplikaciji = new javax.swing.JMenu();
         LogOut = new javax.swing.JMenu();
+        Settings = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] Main Menu");
-        setPreferredSize(getMaximumSize());
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         AdministracijaTimova.setText("Administracija Timova");
 
@@ -120,7 +125,7 @@ public class MasterForma extends javax.swing.JDialog {
         });
         AdministracijaTimova.add(PretragaTimova);
 
-        jMenuBar1.add(AdministracijaTimova);
+        menuBar.add(AdministracijaTimova);
 
         AdministracijaTurnira.setText("Administracija Turnira");
 
@@ -136,13 +141,27 @@ public class MasterForma extends javax.swing.JDialog {
         IzmenaTurnira.setText("Izmena Turnira");
         AdministracijaTurnira.add(IzmenaTurnira);
 
-        jMenuBar1.add(AdministracijaTurnira);
+        menuBar.add(AdministracijaTurnira);
 
         UnosRezultata.setText("Unos Rezultata");
-        jMenuBar1.add(UnosRezultata);
+        UnosRezultata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UnosRezultataActionPerformed(evt);
+            }
+        });
+
+        Unos.setText("Unos");
+        Unos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UnosActionPerformed(evt);
+            }
+        });
+        UnosRezultata.add(Unos);
+
+        menuBar.add(UnosRezultata);
 
         OAplikaciji.setText("O Aplikaciji");
-        jMenuBar1.add(OAplikaciji);
+        menuBar.add(OAplikaciji);
 
         LogOut.setText("Log Out");
         LogOut.addActionListener(new java.awt.event.ActionListener() {
@@ -150,9 +169,12 @@ public class MasterForma extends javax.swing.JDialog {
                 LogOutActionPerformed(evt);
             }
         });
-        jMenuBar1.add(LogOut);
+        menuBar.add(LogOut);
 
-        setJMenuBar(jMenuBar1);
+        Settings.setText("Settings");
+        menuBar.add(Settings);
+
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,13 +215,70 @@ public class MasterForma extends javax.swing.JDialog {
     }//GEN-LAST:event_LogOutActionPerformed
 
     private void PretragaTimovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PretragaTimovaActionPerformed
-      JDialog dialog = new PretrragaTimova(null, true);
-      dialog.pack();
-      dialog.setLocationRelativeTo(null);
-      dialog.setVisible(true);
-      
+        JDialog dialog = new PretrragaTimova(null, true);
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+
     }//GEN-LAST:event_PretragaTimovaActionPerformed
 
+    private void UnosRezultataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnosRezultataActionPerformed
+        JDialog dialog = new UnosRezultata(null, true);
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_UnosRezultataActionPerformed
+
+    private void UnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnosActionPerformed
+        JDialog dialog = new UnosRezultata(null, true);
+        dialog.pack();
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }//GEN-LAST:event_UnosActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MasterForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MasterForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MasterForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MasterForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the dialog */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                MasterForma dialog = getInstance();
+                dialog.srediPanelSlike();
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+
+                //dialog.setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu AdministracijaTimova;
@@ -212,23 +291,24 @@ public class MasterForma extends javax.swing.JDialog {
     private javax.swing.JMenu OAplikaciji;
     private javax.swing.JMenuItem PretragaTimova;
     private javax.swing.JMenuItem PretragaTurnira;
+    private javax.swing.JMenu Settings;
+    private javax.swing.JMenuItem Unos;
     private javax.swing.JMenu UnosRezultata;
     private javax.swing.JMenuItem UnosTimova;
     private javax.swing.JMenuItem UnosTurnira;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 
     public void srediPanelSlike() {
         MasterForma frame = getInstance();
         frame.setContentPane(createBackgroundPanel());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
+
         Toolkit tk = Toolkit.getDefaultToolkit();
         int xSize = tk.getScreenSize().width;
         int ySize = tk.getScreenSize().height;
         frame.setSize(xSize, ySize);
-        
-        
+
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

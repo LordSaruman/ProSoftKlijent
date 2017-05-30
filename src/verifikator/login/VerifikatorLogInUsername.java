@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class VerifikatorLogInUsername implements IValidator{
 
+    public String username = "";
     @Override
     public boolean validate(Object value) throws Exception {
         String user = value.toString();
@@ -23,10 +24,14 @@ public class VerifikatorLogInUsername implements IValidator{
         for (Korisnik korisnik : lista) {
             if (korisnik.getUsername().equals(user)) {
                 flag = true;
+                username = korisnik.getUsername();
                 return flag;
             }
         }
         return flag;
     }
     
+    public String vratiUsera(){
+        return username;
+    }
 }

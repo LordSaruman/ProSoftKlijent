@@ -6,11 +6,16 @@
 package forme;
 
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import kontrolor.KontrolerLogIn;
 import login.panel.PanelInputTextFieldLogInPassword;
 import login.panel.PanelInputTextFieldLoginusername;
@@ -21,12 +26,11 @@ import verifikator.login.VerifikatorLogInUsername;
  *
  * @author filip_000
  */
-public class LoginForma extends javax.swing.JDialog {
+public class LoginForma extends javax.swing.JDialog implements ActionListener{
 
     /**
      * Creates new form LoginForma
      */
-    
     
     public LoginForma(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
@@ -35,6 +39,9 @@ public class LoginForma extends javax.swing.JDialog {
         srediSvePanele();
         setValidator();
         //proslediUneteVrednostiValidatoru();
+        btnLogIn.setMnemonic(KeyEvent.VK_ENTER);
+        btnLogIn.setActionCommand("potvrdi");
+        btnLogIn.addActionListener((ActionListener) this);
     }
 
     /**
@@ -52,11 +59,11 @@ public class LoginForma extends javax.swing.JDialog {
         panelInputTextFieldLogInPassword1 = new login.panel.PanelInputTextFieldLogInPassword();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("[CSGO] Log In forma");
+        setTitle("[CSGO] Login form\n");
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        jPanelUnosPodataka.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Unos podataka"));
+        jPanelUnosPodataka.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data entry"));
 
         btnLogIn.setText("Log In");
         btnLogIn.addActionListener(new java.awt.event.ActionListener() {
@@ -109,13 +116,13 @@ public class LoginForma extends javax.swing.JDialog {
         try {
             proslediUneteVrednostiValidatoru();
             if (PanelInputTextFieldLogInPassword.konacanPassword == true && PanelInputTextFieldLoginusername.konacanUsername == true) {
-                JOptionPane.showMessageDialog(this, "Uspesno ste se ulogovali!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Successful login", "Success", JOptionPane.INFORMATION_MESSAGE);
                 KontrolerLogIn.getInstance().ugasiPocetnuFormu();
-
+                
                 MasterForma forma = new MasterForma((Frame) getParent(), true);
                 forma.srediPanelSlike();
             } else {
-                JOptionPane.showMessageDialog(this, "Neuspesno logovanje!", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Failed login!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             Logger.getLogger(LoginForma.class.getName()).log(Level.SEVERE, null, ex);
@@ -159,5 +166,13 @@ public class LoginForma extends javax.swing.JDialog {
         String username = panelInputTextFieldLoginusername1.getValue().toString();
         String password = panelInputTextFieldLogInPassword1.getValue().toString();
     }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if ("enter".equals(ae.getActionCommand())) {
+            btnLogIn.doClick();
+        }
+    }
+
 
 }

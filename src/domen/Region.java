@@ -10,7 +10,7 @@ package domen;
  * @author filip_000
  */
 public class Region {
-    
+
     private int idRegiona;
     private String nazivRegiona;
 
@@ -42,6 +42,5 @@ public class Region {
     public String toString() {
         return nazivRegiona;
     }
-    
-    
+
 }

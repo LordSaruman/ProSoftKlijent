@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class VerifikatorLogInPassword implements IValidator{
 
+    public String password = "";
     @Override
     public boolean validate(Object value) throws Exception {
         String pass = value.toString();
@@ -23,9 +24,14 @@ public class VerifikatorLogInPassword implements IValidator{
         for (Korisnik korisnik : lista) {
             if (korisnik.getPassword().equals(pass)) {
                 flag = true;
+                password = korisnik.getPassword();
                 return flag;
             }
         }
         return flag;
+    }
+    
+    public String vratiPassword(){
+        return password;
     }
 }

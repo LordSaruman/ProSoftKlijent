@@ -5,6 +5,7 @@
  */
 package kontrolor;
 
+import domen.Korisnik;
 import domen.Lokacija;
 import domen.Region;
 import domen.Tim;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import sistemske.operacije.SacuvajTim;
+import sistemske.operacije.VratiListuKorisnika;
 import sistemske.operacije.VratiListuLokacija;
 import sistemske.operacije.VratiListuManagera;
 import sistemske.operacije.VratiListuRegiona;
@@ -66,6 +68,12 @@ public class Kontrolor {
         AbstractSistemskaOperacija aso = new VratiListuManagera();
         aso.izvrsiOperaciju(aso);
         return ((VratiListuManagera) aso).getListaManagera();
+    }
+
+    public ArrayList<Korisnik> vratiListuKorisnika() throws Exception {
+        AbstractSistemskaOperacija aso = new VratiListuKorisnika();
+        aso.izvrsiOperaciju(aso);
+        return ((VratiListuKorisnika) aso).getListuKorisnika();
     }
 
 }

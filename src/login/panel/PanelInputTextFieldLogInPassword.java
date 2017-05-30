@@ -5,6 +5,7 @@
  */
 package login.panel;
 
+import kontrolor.KontrolerLogIn;
 import verifikator.login.IValidator;
 
 /**
@@ -90,19 +91,18 @@ public class PanelInputTextFieldLogInPassword extends javax.swing.JPanel impleme
                 boolean flag = false;
                 flag = validator.validate(jtxtValue.getText().trim());
                 if(flag == false){
-                    jlabelError.setText("Nije dobar password");
+                    jlabelError.setText("Password is not valid.");
                 }else{
                     jlabelError.setText("");
                     konacanPassword = true;
                 }
             }catch(Exception ex){
                 jlabelError.setText(ex.getMessage());
-                throw new Exception("Doslo je do greske!");
+                throw new Exception("Error!");
             }
         }
         return jtxtValue.getText().trim();
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jlabelError;

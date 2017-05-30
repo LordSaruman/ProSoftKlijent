@@ -90,14 +90,14 @@ public class PanelInputTextFieldLoginusername extends javax.swing.JPanel impleme
                 boolean flag = false;
                 flag = validator.validate(jtxtValue.getText().trim());
                 if (flag == false) {
-                    jlabelError.setText("Nije dobar username.");
+                    jlabelError.setText("Username is not valid.");
                     
                 }else{
                     jlabelError.setText("");
                     konacanUsername = true;
                 }
             }catch(Exception ex){
-                throw new Exception("Doslo je do greske!");
+                throw new Exception("Error!");
             }
         }
         return jtxtValue.getText().trim();
