@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import kontrolor.Kontrolor;
+import kontroler.GUIKontroler;
 import table.model.TimoviTableModel;
 
 /**
@@ -257,7 +257,7 @@ public class PretrragaTimova extends javax.swing.JDialog {
     private void initCustomCompoennts() {
         List<Tim> spisakTimova = null;
         try {
-            spisakTimova = kontrolor.Kontrolor.getInstance().vratiListuTimova();
+            spisakTimova = GUIKontroler.getInstance().vratiListuTimova();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Greska pri vracanju timova iz baze!", "Greska", JOptionPane.ERROR_MESSAGE);
         }

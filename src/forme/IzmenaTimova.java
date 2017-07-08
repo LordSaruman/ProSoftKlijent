@@ -10,7 +10,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import kontrolor.Kontrolor;
+import komunikacija.Komunikacija;
+import kontroler.GUIKontroler;
+import operacije.Operacija;
+import transfer.KlijentskiZahtev;
+import transfer.ServerskiOdgovor;
+import transfer.StatusZahteva;
 
 /**
  *
@@ -67,30 +72,30 @@ public class IzmenaTimova extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Tim"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Team"));
 
-        jLabel1.setText("Naziv tima:");
+        jLabel1.setText("Name of team:");
 
-        jLabel2.setText("Lokacija:");
+        jLabel2.setText("Location:");
 
         jLabel3.setText("Region:");
 
-        jLabel4.setText("Trener:");
+        jLabel4.setText("Coach:");
 
-        jLabel5.setText("Sponzor:");
+        jLabel5.setText("Sponsor:");
 
-        jLabel6.setText("Zarađen novac:");
+        jLabel6.setText("Earned money:");
 
-        btnSacuvajTim.setText("Sačuvaj tim");
+        btnSacuvajTim.setText("Save the team");
         btnSacuvajTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSacuvajTimActionPerformed(evt);
             }
         });
 
-        jLabel13.setText("Menadžer:");
+        jLabel13.setText("Manager:");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Igre koje tim igra"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Games that team plays\n"));
 
         jcbCSGO.setText("Counter-Strike: Global Offensive");
 
@@ -132,9 +137,14 @@ public class IzmenaTimova extends javax.swing.JDialog {
 
         jlblIgreKojeTimIgraPoruka.setForeground(new java.awt.Color(255, 0, 0));
 
-        btnIzmeni.setText("Izmeni Podatke");
+        btnIzmeni.setText("Change the data");
+        btnIzmeni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzmeniActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Ucitaj podatke za Tim");
+        jButton1.setText("Load the data of the team");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -153,7 +163,7 @@ public class IzmenaTimova extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel13)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                                     .addComponent(txtFieldMenadzer, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jlbMenadzerPoruka, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -316,15 +326,35 @@ public class IzmenaTimova extends javax.swing.JDialog {
         txtFieldSponzor.setText(tim.getSponzor());
         txtFieldTrener.setText(tim.getTrener());
         txtFieldZaradjenNovac.setText(tim.getZaradjenNovac().toString());
-        
+
         String igre = tim.getIgre();
         if (igre.contains("CSGO")) {
             jcbCSGO.isSelected();
+            jcbCSGO.setEnabled(false);
             if (igre.contains("Dota2")) {
                 jcbDota2.isSelected();
+                jcbDota2.setEnabled(false);
             }
         }
+        
+        txtFieldLokacija.setEnabled(false);
+        txtFieldMenadzer.setEnabled(false);
+        txtFieldRegion.setEnabled(false);
+        txtFieldSponzor.setEnabled(false);
+        txtFieldTrener.setEnabled(false);
+        txtFieldZaradjenNovac.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
+        jcbCSGO.setEnabled(true);
+        jcbDota2.setEnabled(true);
+        txtFieldLokacija.setEnabled(true);
+        txtFieldMenadzer.setEnabled(true);
+        txtFieldRegion.setEnabled(true);
+        txtFieldSponzor.setEnabled(true);
+        txtFieldTrener.setEnabled(true);
+        txtFieldZaradjenNovac.setEnabled(true);
+    }//GEN-LAST:event_btnIzmeniActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIzmeni;
@@ -359,10 +389,18 @@ public class IzmenaTimova extends javax.swing.JDialog {
 
     private void popuniComboNazivTimova() throws Exception {
         comboNazivTima.removeAllItems();
-        ArrayList<Tim> lista = Kontrolor.getInstance().vratiListuTimova();
+        ArrayList<Tim> lista = new ArrayList<>();
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacija.VRATI_LISTU);
+        kz.setParametar(new Tim());
+        Komunikacija.getInstance().posaljiZahtev(kz);
 
-        for (Tim tim : lista) {
-            comboNazivTima.addItem(tim);
+        ServerskiOdgovor so = Komunikacija.getInstance().primiOdgovor();
+        if (so.getStatusZahteva() == StatusZahteva.USPESAN_ZAHTEV) {
+            lista = (ArrayList<Tim>) so.getOdgovor();
+            for (Tim tim : lista) {
+                comboNazivTima.addItem(tim);
+            }
         }
     }
 }

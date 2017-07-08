@@ -7,7 +7,7 @@ package start;
 
 import forme.PocetnaForma;
 import javax.swing.JFrame;
-import kontrolor.KontrolerLogIn;
+import kontroler.GUIKontroler;
 
 /**
  *
@@ -46,9 +46,8 @@ public class Start {
                 JFrame pocetna = new PocetnaForma();
                 pocetna.setLocationRelativeTo(null);
                 pocetna.setVisible(true);
-                KontrolerLogIn.getInstance().postaviInstancuForme(pocetna);
                 
-                
+                GUIKontroler.getInstance().postaviInstancuForme(pocetna);
             }
         });
     }

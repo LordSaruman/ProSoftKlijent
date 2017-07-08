@@ -11,30 +11,31 @@ import verifikator.login.IValidator;
  *
  * @author filip_000
  */
-public class PanelInputTextFieldLoginusername extends javax.swing.JPanel implements IGetValue{
+public class PanelInputTextFieldLoginusername extends javax.swing.JPanel implements IGetValue {
 
     public static boolean konacanUsername = false;
     private IValidator validator;
+
     /**
      * Creates new form PanelInputTextFieldLogin
      */
     public PanelInputTextFieldLoginusername() {
         initComponents();
     }
-    
-    public void setText(String text){
+
+    public void setText(String text) {
         jlabelText.setText(text);
     }
-    
-    public void setValue(String value){
+
+    public void setValue(String value) {
         jtxtValue.setText(value);
     }
-    
-    public void setError(String error){
+
+    public void setError(String error) {
         jlabelError.setText(error);
     }
-    
-    public void setValidator (IValidator validator){
+
+    public void setValidator(IValidator validator) {
         this.validator = validator;
     }
 
@@ -85,18 +86,18 @@ public class PanelInputTextFieldLoginusername extends javax.swing.JPanel impleme
 
     @Override
     public Object getValue() throws Exception {
-        if(validator != null){
-            try{
+        if (validator != null) {
+            try {
                 boolean flag = false;
                 flag = validator.validate(jtxtValue.getText().trim());
                 if (flag == false) {
                     jlabelError.setText("Username is not valid.");
-                    
-                }else{
+
+                } else {
                     jlabelError.setText("");
                     konacanUsername = true;
                 }
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 throw new Exception("Error!");
             }
         }
@@ -109,4 +110,5 @@ public class PanelInputTextFieldLoginusername extends javax.swing.JPanel impleme
     private javax.swing.JLabel jlabelText;
     private javax.swing.JTextField jtxtValue;
     // End of variables declaration//GEN-END:variables
+
 }

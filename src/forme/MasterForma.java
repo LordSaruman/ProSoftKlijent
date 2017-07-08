@@ -15,8 +15,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import kontrolor.KontrolerLogIn;
+import kontroler.GUIKontroler;
 
 /**
  *
@@ -39,6 +40,7 @@ public class MasterForma extends javax.swing.JDialog {
     public MasterForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        srediPoziv();
     }
 
     private JPanel createBackgroundPanel() {
@@ -211,7 +213,7 @@ public class MasterForma extends javax.swing.JDialog {
     }//GEN-LAST:event_IzmenaTimovaActionPerformed
 
     private void LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutActionPerformed
-        KontrolerLogIn.getInstance().vratiFormu();
+        GUIKontroler.getInstance().vratiFormu();
     }//GEN-LAST:event_LogOutActionPerformed
 
     private void PretragaTimovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PretragaTimovaActionPerformed
@@ -223,17 +225,25 @@ public class MasterForma extends javax.swing.JDialog {
     }//GEN-LAST:event_PretragaTimovaActionPerformed
 
     private void UnosRezultataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnosRezultataActionPerformed
-        JDialog dialog = new UnosRezultata(null, true);
-        dialog.pack();
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+        try {
+            JDialog dialog = new UnosRezultata(null, true);
+            dialog.pack();
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(MasterForma.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_UnosRezultataActionPerformed
 
     private void UnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnosActionPerformed
-        JDialog dialog = new UnosRezultata(null, true);
-        dialog.pack();
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+        try {
+            JDialog dialog = new UnosRezultata(null, true);
+            dialog.pack();
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(MasterForma.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_UnosActionPerformed
 
     /**
@@ -312,5 +322,10 @@ public class MasterForma extends javax.swing.JDialog {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private void srediPoziv() {
+        String korisnikUl = GUIKontroler.getInstance().postaviUlogovanogKorisnika();
+        JOptionPane.showMessageDialog(this, "Welcome " + korisnikUl, "Info", JOptionPane.INFORMATION_MESSAGE);
     }
 }

@@ -8,15 +8,14 @@ package forme;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
-import kontrolor.KontrolerLogIn;
+import kontroler.GUIKontroler;
 import login.panel.PanelInputTextFieldLogInPassword;
 import login.panel.PanelInputTextFieldLoginusername;
 import verifikator.login.VerifikatorLogInPassword;
@@ -26,12 +25,11 @@ import verifikator.login.VerifikatorLogInUsername;
  *
  * @author filip_000
  */
-public class LoginForma extends javax.swing.JDialog implements ActionListener{
+public class LoginForma extends javax.swing.JDialog implements ActionListener {
 
     /**
      * Creates new form LoginForma
      */
-    
     public LoginForma(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
 
@@ -117,8 +115,8 @@ public class LoginForma extends javax.swing.JDialog implements ActionListener{
             proslediUneteVrednostiValidatoru();
             if (PanelInputTextFieldLogInPassword.konacanPassword == true && PanelInputTextFieldLoginusername.konacanUsername == true) {
                 JOptionPane.showMessageDialog(this, "Successful login", "Success", JOptionPane.INFORMATION_MESSAGE);
-                KontrolerLogIn.getInstance().ugasiPocetnuFormu();
-                
+                GUIKontroler.getInstance().ugasiPocetnuFormu();
+
                 MasterForma forma = new MasterForma((Frame) getParent(), true);
                 forma.srediPanelSlike();
             } else {
@@ -158,8 +156,8 @@ public class LoginForma extends javax.swing.JDialog implements ActionListener{
     }
 
     private void setValidator() {
-        panelInputTextFieldLoginusername1.setValidator(new VerifikatorLogInUsername());
-        panelInputTextFieldLogInPassword1.setValidator(new VerifikatorLogInPassword());
+        panelInputTextFieldLoginusername1.setValidator(VerifikatorLogInUsername.getInstance());
+        panelInputTextFieldLogInPassword1.setValidator(VerifikatorLogInPassword.getInstance());
     }
 
     private void proslediUneteVrednostiValidatoru() throws Exception {
@@ -173,6 +171,5 @@ public class LoginForma extends javax.swing.JDialog implements ActionListener{
             btnLogIn.doClick();
         }
     }
-
 
 }

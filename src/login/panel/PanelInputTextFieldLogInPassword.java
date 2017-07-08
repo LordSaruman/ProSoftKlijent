@@ -5,7 +5,6 @@
  */
 package login.panel;
 
-import kontrolor.KontrolerLogIn;
 import verifikator.login.IValidator;
 
 /**

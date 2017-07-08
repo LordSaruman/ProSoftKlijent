@@ -14,8 +14,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import kontrolor.KontrolerLogIn;
-import kontrolor.Kontrolor;
+import komunikacija.Komunikacija;
+import kontroler.GUIKontroler;
+import operacije.Operacija;
+import transfer.KlijentskiZahtev;
+import transfer.ServerskiOdgovor;
+import transfer.StatusZahteva;
 
 /**
  *
@@ -50,9 +54,8 @@ public class UnosTimova extends javax.swing.JDialog {
         listaR = vratiListuR();
         listaL = vratiListuL();
         initComponents();
-        popuniRegione();
-        popuniLokacije();
         srediTextFieldSignedIn();
+        popuniKombove();
     }
 
     /**
@@ -91,14 +94,17 @@ public class UnosTimova extends javax.swing.JDialog {
         jlblIgreKojeTimIgraPoruka = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtFieldSignedUser = new javax.swing.JTextField();
+        checkBoxShowAllTeams = new javax.swing.JCheckBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] Unos Timova");
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Tim"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Team"));
 
-        jLabel1.setText("Naziv tima:");
+        jLabel1.setText("Team name:");
 
         txtFieldNazivTima.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -106,11 +112,11 @@ public class UnosTimova extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Lokacija:");
+        jLabel2.setText("Location:");
 
         jLabel3.setText("Region:");
 
-        jLabel4.setText("Trener:");
+        jLabel4.setText("Coach:");
 
         txtFieldTrener.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -124,9 +130,9 @@ public class UnosTimova extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setText("Sponzor:");
+        jLabel5.setText("Sponsor:");
 
-        jLabel6.setText("Zarađen novac:");
+        jLabel6.setText("Earned Money:");
 
         txtFieldZaradjenNovac.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -134,14 +140,14 @@ public class UnosTimova extends javax.swing.JDialog {
             }
         });
 
-        btnSacuvajTim.setText("Sačuvaj tim");
+        btnSacuvajTim.setText("Save Team");
         btnSacuvajTim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSacuvajTimActionPerformed(evt);
             }
         });
 
-        jLabel13.setText("Menadžer:");
+        jLabel13.setText("Manager:");
 
         txtFieldMenadzer.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -155,7 +161,7 @@ public class UnosTimova extends javax.swing.JDialog {
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Igre koje tim igra"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Games which team plays:"));
 
         jcbCSGO.setText("Counter-Strike: Global Offensive");
 
@@ -204,60 +210,57 @@ public class UnosTimova extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSacuvajTim)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(37, 37, 37)
-                                .addComponent(txtFieldNazivTima, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel13)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(39, 39, 39)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGap(31, 31, 31)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtFieldNazivTima, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtFieldMenadzer, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtFieldTrener, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtFieldSponzor, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(comboRegion, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(comboLokacija, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtFieldZaradjenNovac, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlbMenadzerPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-                            .addComponent(jlblNazivTImaPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblTrenerPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jlblSponzorPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jlblSponzorPoruka, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+                            .addComponent(jlbMenadzerPoruka, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlblTrenerPoruka, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jlblNazivTImaPoruka, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jlblZaradjenNovacPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSacuvajTim))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jlblIgreKojeTimIgraPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jlblIgreKojeTimIgraPoruka, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(2, 2, 2)
-                            .addComponent(jLabel1))
-                        .addComponent(txtFieldNazivTima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jlblNazivTImaPoruka, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtFieldNazivTima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(2, 2, 2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jlblNazivTImaPoruka, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -305,6 +308,21 @@ public class UnosTimova extends javax.swing.JDialog {
 
         jLabel7.setText("Signed in user:");
 
+        checkBoxShowAllTeams.setText("Show all teams");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -312,12 +330,18 @@ public class UnosTimova extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(checkBoxShowAllTeams)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(txtFieldSignedUser, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(txtFieldSignedUser, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -330,7 +354,12 @@ public class UnosTimova extends javax.swing.JDialog {
                         .addComponent(jLabel7))
                     .addComponent(txtFieldSignedUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(checkBoxShowAllTeams)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
 
@@ -358,10 +387,23 @@ public class UnosTimova extends javax.swing.JDialog {
 
             if (izvrsiValidaciju(naziv, trener, menadzer, sponzor, region, lokacija, igre, novac) == true) {
                 tim = vratiTim(naziv, trener, menadzer, sponzor, region, lokacija, igre, novac);
-                Kontrolor.getInstance().sacuvajTim(tim);
-                JOptionPane.showMessageDialog(this, "Team has been successfully saved!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                KlijentskiZahtev kz = new KlijentskiZahtev();
+                kz.setOperacija(Operacija.SACUVAJ);
+                kz.setParametar(tim);
+                Komunikacija.getInstance().posaljiZahtev(kz);
+
+                ServerskiOdgovor so = Komunikacija.getInstance().primiOdgovor();
+                if (so.getStatusZahteva() == StatusZahteva.USPESAN_ZAHTEV) {
+                    JOptionPane.showMessageDialog(this, "Team has been successfully saved!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Team has not been saved.", "Error", JOptionPane.ERROR_MESSAGE);
+                    invalidate();
+                    repaint();
+                    validate();
+                    return;
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Team has not been saved.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Failed validation. Check all fields.", "Error", JOptionPane.ERROR_MESSAGE);
                 invalidate();
                 repaint();
                 validate();
@@ -405,6 +447,7 @@ public class UnosTimova extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSacuvajTim;
+    private javax.swing.JCheckBox checkBoxShowAllTeams;
     private javax.swing.JComboBox comboLokacija;
     private javax.swing.JComboBox comboRegion;
     private javax.swing.JLabel jLabel1;
@@ -417,6 +460,8 @@ public class UnosTimova extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JCheckBox jcbCSGO;
     private javax.swing.JCheckBox jcbDota2;
     private javax.swing.JLabel jlbMenadzerPoruka;
@@ -443,60 +488,43 @@ public class UnosTimova extends javax.swing.JDialog {
         return lista;
     }
 
-    private void popuniRegione() throws Exception {
-        comboRegion.removeAllItems();
-        ArrayList<Region> lista = Kontrolor.getInstance().vratiListuRegiona();
 
-        for (Region region : lista) {
-            comboRegion.addItem(region);
-        }
-    }
-
-    private void popuniLokacije() throws Exception {
-        comboLokacija.removeAllItems();
-        ArrayList<Lokacija> lista = Kontrolor.getInstance().vratiListuLokacija();
-
-        for (Lokacija lokacija : lista) {
-            comboLokacija.addItem(lokacija);
-        }
-    }
-
-    private void popuniListuLokacija(Region r) {
-        comboLokacija.removeAllItems();
-
-        for (Lokacija lokacija : listaL) {
-            if (lokacija.getRegion() == r) {
-                comboLokacija.addItem(lokacija);
-            }
-        }
-    }
+    
 
     private boolean izvrsiValidaciju(String naziv, String trener, String menadzer, String sponzor, Region region, Lokacija lokacija, String igre, String novac) throws Exception {
         boolean validnaForma = true;
-        ArrayList<Tim> listaTimova = Kontrolor.getInstance().vratiListuTimova();
+        ArrayList<Tim> listaTimova = GUIKontroler.getInstance().vratiListuTimova();
 
         if (naziv == null || naziv.isEmpty()) {
             jlblNazivTImaPoruka.setText("Field for team name is empty.");
             jlblNazivTImaPoruka.setForeground(Color.red);
             validnaForma = false;
+        } else {
+            jlblNazivTImaPoruka.setText("");
         }
 
         if (trener == null || trener.isEmpty()) {
             jlblTrenerPoruka.setText("Field for coach is empty.");
             jlblTrenerPoruka.setForeground(Color.red);
             validnaForma = false;
+        } else {
+            jlblTrenerPoruka.setText("");
         }
 
         if (menadzer == null || menadzer.isEmpty()) {
             jlbMenadzerPoruka.setText("Field for manager is empty.");
             jlbMenadzerPoruka.setForeground(Color.red);
             validnaForma = false;
+        } else {
+            jlbMenadzerPoruka.setText("");
         }
 
         if (sponzor == null || sponzor.isEmpty()) {
             jlblSponzorPoruka.setText("Field for sponsor is empty.");
             jlblSponzorPoruka.setForeground(Color.red);
             validnaForma = false;
+        } else {
+            jlblSponzorPoruka.setText("");
         }
 
         if (novac == null || novac.isEmpty()) {
@@ -504,10 +532,12 @@ public class UnosTimova extends javax.swing.JDialog {
             jlblZaradjenNovacPoruka.setForeground(Color.red);
             validnaForma = false;
         } else {
+            jlblZaradjenNovacPoruka.setText("");
             for (int i = 0; i < novac.length(); i++) {
                 if (!Character.isDigit(novac.charAt(i))) {
                     jlblZaradjenNovacPoruka.setText("Only numbers can be accepted here.");
                     jlblZaradjenNovacPoruka.setForeground(Color.red);
+                    validnaForma = false;
                     break;
                 }
             }
@@ -517,6 +547,8 @@ public class UnosTimova extends javax.swing.JDialog {
             jlblIgreKojeTimIgraPoruka.setText("At least one option must be checked.");
             jlblIgreKojeTimIgraPoruka.setForeground(Color.red);
             validnaForma = false;
+        } else {
+            jlblIgreKojeTimIgraPoruka.setText("");
         }
 
         if (listaTimova.contains(naziv)) {
@@ -549,11 +581,23 @@ public class UnosTimova extends javax.swing.JDialog {
     }
 
     private void srediTextFieldSignedIn() {
-        txtFieldSignedUser.setText(KontrolerLogIn.getInstance().postaviUlogovanogKorisnika());
-        txtFieldSignedUser.setEditable(false);
+        if (txtFieldSignedUser.getText().isEmpty()) {
+            txtFieldSignedUser.setText(GUIKontroler.getInstance().postaviUlogovanogKorisnika());
+            txtFieldSignedUser.setEditable(false);
+        }
     }
 
     private Tim vratiTim(String naziv, String trener, String menadzer, String sponzor, Region region, Lokacija lokacija, String igre, String novac) {
         return new Tim(idTima, naziv, trener, menadzer, sponzor, igre, gold, region, lokacija);
+    }
+
+    private void popuniKombove() {
+        comboLokacija.removeAllItems();
+        comboRegion.removeAllItems();
+        
+        ArrayList<Lokacija> listaL = new ArrayList<>();
+        ArrayList<Region> listaR = new ArrayList<>();
+        
+        listaL = GUIKontroler.getInstance().vratiListu(new Lokacija());
     }
 }

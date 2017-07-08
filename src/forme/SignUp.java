@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
-import kontrolor.Kontrolor;
+import kontroler.GUIKontroler;
 
 /**
  *
@@ -127,7 +127,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(38, 38, 38)
@@ -145,7 +145,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                                         .addComponent(jlblPorukaUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addGap(19, 19, 19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jlblPorukaSurname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtSurname, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))
@@ -156,13 +156,16 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                                     .addComponent(jlblPorukaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRevelaHide, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnRevelaHide, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton1))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 891, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 891, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -183,24 +186,31 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlblPorukaUsername)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)
-                        .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4))
-                    .addComponent(btnRevelaHide, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jlblPorukaSurname)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jlblPorukaPassword)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6)
+                                        .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(36, 36, 36))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(btnRevelaHide, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addGap(35, 35, 35)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(42, 42, 42)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlblPorukaSurname)
+                            .addComponent(jlblPorukaPassword))
+                        .addContainerGap(45, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(36, 36, 36))))
         );
 
         jLabel1.setText("Welcome to the sign up page. Please provide the following info:");
@@ -213,15 +223,17 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(282, 282, 282)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3))
         );
@@ -243,7 +255,11 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
 
         try {
             korisnik = kreirajIIzvrsiValidaciju(name, surname, username, password);
+            GUIKontroler.getInstance().sacuvajKorisnika(korisnik);
+            JOptionPane.showMessageDialog(this, "Successful login", "Success", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Unsuccessful login", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -277,30 +293,38 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
 
     private Korisnik kreirajIIzvrsiValidaciju(String name, String surname, String username, String password) throws Exception {
         boolean validnaForma = true;
-        ArrayList<Korisnik> lista = Kontrolor.getInstance().vratiListuKorisnika();
+        ArrayList<Korisnik> lista = GUIKontroler.getInstance().vratiListuKorisnika();
 
         if (name == null || name.isEmpty()) {
             jlblPorukaName.setText("Name field is empty");
             jlblPorukaName.setForeground(Color.red);
             validnaForma = false;
+        }else{
+            jlblPorukaName.setText("");
         }
 
         if (surname == null || surname.isEmpty()) {
             jlblPorukaSurname.setText("Surname field is empty");
             jlblPorukaSurname.setForeground(Color.red);
             validnaForma = false;
+        }else{
+            jlblPorukaSurname.setText("");
         }
 
         if (username == null || username.isEmpty()) {
             jlblPorukaUsername.setText("Username field is empty");
             jlblPorukaUsername.setForeground(Color.red);
             validnaForma = false;
+        }else{
+            jlblPorukaUsername.setText("");
         }
 
         if (password == null || password.isEmpty()) {
             jlblPorukaPassword.setText("Password field is empty");
             jlblPorukaPassword.setForeground(Color.red);
             validnaForma = false;
+        }else{
+            jlblPorukaPassword.setText("");
         }
 
         for (Korisnik korisnik : lista) {
@@ -349,23 +373,23 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
         for (char c : input) {
             password += c;
         }
-        
-        boolean hasUppercase  = !password.equals(password.toUpperCase());
+
+        boolean hasUppercase = !password.equals(password.toUpperCase());
         boolean hasLowercase = !password.equals(password.toLowerCase());
         boolean hasSpecial = password.matches(".*[!@#$%^&*].*");
-        
+
         if (password.length() < 8) {
             flag = false;
             greska = "Password doesn't have at least 8 characters";
             return flag;
         }
-        
+
         if (!hasLowercase && !hasUppercase) {
             flag = false;
             greska = "Password doesn't contains both uppercase and lowercase letter";
             return false;
         }
-        
+
         if (!hasSpecial) {
             greska = "Password doesn't contains special characters [!@#$%^&*]";
             flag = false;

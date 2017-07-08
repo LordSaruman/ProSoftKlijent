@@ -7,20 +7,35 @@ package verifikator.login;
 
 import domen.Korisnik;
 import java.util.ArrayList;
+import kontroler.GUIKontroler;
 
 /**
  *
  * @author filip_000
  */
-public class VerifikatorLogInPassword implements IValidator{
+public class VerifikatorLogInPassword implements IValidator {
+
+    private static VerifikatorLogInPassword inPassword;
+
+    private VerifikatorLogInPassword() {
+        password = "";
+    }
+
+    public static VerifikatorLogInPassword getInstance() {
+        if (inPassword == null) {
+            inPassword = new VerifikatorLogInPassword();
+        }
+        return inPassword;
+    }
 
     public String password = "";
+
     @Override
     public boolean validate(Object value) throws Exception {
         String pass = value.toString();
         boolean flag = false;
-        ArrayList<Korisnik> lista = kontrolor.KontrolerLogIn.getInstance().vratiListuKorisnika();
-        
+        ArrayList<Korisnik> lista = GUIKontroler.getInstance().vratiListuKorisnika();
+
         for (Korisnik korisnik : lista) {
             if (korisnik.getPassword().equals(pass)) {
                 flag = true;
@@ -29,9 +44,5 @@ public class VerifikatorLogInPassword implements IValidator{
             }
         }
         return flag;
-    }
-    
-    public String vratiPassword(){
-        return password;
     }
 }
