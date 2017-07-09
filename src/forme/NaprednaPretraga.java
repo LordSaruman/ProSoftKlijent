@@ -78,6 +78,11 @@ public class NaprednaPretraga extends javax.swing.JDialog {
         });
 
         btnObrisiFilter.setText("Obrisi mrtvi filter");
+        btnObrisiFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiFilterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,26 +117,33 @@ public class NaprednaPretraga extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdustaniActionPerformed
-        JOptionPane.showMessageDialog(this, "Da li ste sigurni da zelite da odustanate", "Info", JOptionPane.YES_NO_OPTION);
-        setVisible(false);
+        int rez = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da zelite da odustanate", "Info", JOptionPane.YES_NO_OPTION);
+        if (rez == JOptionPane.YES_OPTION) {
+            setVisible(false);
+        }
     }//GEN-LAST:event_btnOdustaniActionPerformed
 
     private void btnPrimeniPretraguActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeniPretraguActionPerformed
-       List<String> filter = new ArrayList<>();
+        List<String> filter = new ArrayList<>();
         for (JCheckBox jCheckBox : boxovi) {
             if (jCheckBox.isSelected()) {
                 filter.add(jCheckBox.getText());
             }
         }
-        
+
         if (filter.isEmpty()) {
-            //dodaj error
+            JOptionPane.showMessageDialog(null, "Molim izaberite manadzere po kojima zelite da filtirate");
             return;
         }
-        
+
         cale.filtrirajPoNecemu(filter);
         setVisible(false);
     }//GEN-LAST:event_btnPrimeniPretraguActionPerformed
+
+    private void btnObrisiFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiFilterActionPerformed
+        cale.obrisiManadzerFilter();
+        setVisible(false);
+    }//GEN-LAST:event_btnObrisiFilterActionPerformed
 
     private void kojiK() {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

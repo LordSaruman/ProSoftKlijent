@@ -50,7 +50,7 @@ public class RezultatiTabelModel extends AbstractTableModel {
             case 2:
                 return rezultat.getRezultat();
             case 3:
-                return rezultat.getKorisnik();
+                return rezultat.getKorisnik().getUsername();
             default:
                 return "N/A";
         }

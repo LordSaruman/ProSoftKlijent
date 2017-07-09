@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
 import kontroler.GUIKontroler;
 import operacije.Operacija;
+import table.model.TimoviTableModel;
 import transfer.KlijentskiZahtev;
 import transfer.ServerskiOdgovor;
 import transfer.StatusZahteva;
@@ -58,6 +59,7 @@ public class UnosTimova extends javax.swing.JDialog {
         initComponents();
         srediTextFieldSignedIn();
         popuniKombove();
+        popuniTabelu();
     }
 
     /**
@@ -83,7 +85,7 @@ public class UnosTimova extends javax.swing.JDialog {
         btnSacuvajTim = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txtFieldMenadzer = new javax.swing.JTextField();
-        comboRegion = new javax.swing.JComboBox();
+        comboRegion = new javax.swing.JComboBox<>();
         comboLokacija = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jcbCSGO = new javax.swing.JCheckBox();
@@ -381,10 +383,10 @@ public class UnosTimova extends javax.swing.JDialog {
 
             String igre = "";
             if (jcbCSGO.isSelected()) {
-                igre += "CSGO" + "";
-                if (jcbDota2.isSelected()) {
-                    igre += "Dota2";
-                }
+                igre += "CSGO";
+            }
+            if (jcbDota2.isSelected()) {
+                igre += "Dota2";
             }
 
             if (izvrsiValidaciju(naziv, trener, menadzer, sponzor, region, lokacija, igre, novac) == true) {
@@ -397,6 +399,7 @@ public class UnosTimova extends javax.swing.JDialog {
                 ServerskiOdgovor so = Komunikacija.getInstance().primiOdgovor();
                 if (so.getStatusZahteva() == StatusZahteva.USPESAN_ZAHTEV) {
                     JOptionPane.showMessageDialog(this, "Team has been successfully saved!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    setVisible(false);
                 } else {
                     JOptionPane.showMessageDialog(null, "Team has not been saved.", "Error", JOptionPane.ERROR_MESSAGE);
                     invalidate();
@@ -451,7 +454,7 @@ public class UnosTimova extends javax.swing.JDialog {
     private javax.swing.JButton btnSacuvajTim;
     private javax.swing.JCheckBox checkBoxShowAllTeams;
     private javax.swing.JComboBox comboLokacija;
-    private javax.swing.JComboBox comboRegion;
+    private javax.swing.JComboBox<Region> comboRegion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -608,21 +611,26 @@ public class UnosTimova extends javax.swing.JDialog {
         comboLokacija.removeAllItems();
         comboRegion.removeAllItems();
 
-        ArrayList<Lokacija> listaL = new ArrayList<>();
-        ArrayList<Region> listaR = new ArrayList<>();
-
-        try {
-            ArrayList<OpstiDomenskiObjekat> listaL2 = GUIKontroler.getInstance().vratiListu(new Lokacija());
-            ArrayList<OpstiDomenskiObjekat> listaR2 = GUIKontroler.getInstance().vratiListu(new Region());
-
-            for (OpstiDomenskiObjekat opstiDomenskiObjekat : listaL2) {
-                listaL.add((Lokacija) opstiDomenskiObjekat);
-            }
-            for (OpstiDomenskiObjekat opstiDomenskiObjekat : listaR2) {
-                listaR.add((Region) opstiDomenskiObjekat);
-            }
-        } catch (Exception ex) {
+        for (Region region : listaR) {
+            comboRegion.addItem(region);
+        }
+        for (Lokacija lokacija : listaL) {
+            comboLokacija.addItem(lokacija);
         }
 
+    }
+
+    private void popuniTabelu() {
+        ArrayList<Tim> spisakTimova = new ArrayList<>();
+        try {
+            ArrayList<OpstiDomenskiObjekat> list = GUIKontroler.getInstance().vratiListu(new Tim());
+            for (OpstiDomenskiObjekat opstiDomenskiObjekat : list) {
+                spisakTimova.add((Tim) opstiDomenskiObjekat);
+            }
+            TimoviTableModel tableModel = new TimoviTableModel(spisakTimova);
+            jTable1.setModel(tableModel);
+        } catch (Exception ex) {
+            Logger.getLogger(UnosTimova.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

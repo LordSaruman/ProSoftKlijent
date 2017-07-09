@@ -58,28 +58,60 @@ public class TimoviTableModel extends AbstractTableModel {
 
     }
 
+    private String hint = "";
+    private List<String> filter = new ArrayList<>();
+    private int moneyFrom = -1;
+    private int moneyTo = -1;
+
     public void filtirajTabela(String hint) {
-        if (hint.isEmpty()) {
-            spisakTimova = pocetniSpisakTimova;
-        } else {
-            spisakTimova = pocetniSpisakTimova.stream()
-                    .filter((tim) -> {
-                        return tim.getMenadzer().toLowerCase().contains(hint.toLowerCase()) || tim.getNaziv().toLowerCase().contains(hint.toLowerCase());
-                    })
-                    .collect(Collectors.toList());
-        }
-        fireTableDataChanged();
+        this.hint = hint;
+        izvrsiSveFiltere();
     }
 
     public void filtrirajPoNecemu(List<String> filter) {
+        this.filter = filter;
+        izvrsiSveFiltere();
+    }
 
-        spisakTimova = spisakTimova.stream()
+    public void filtirajTabelaPoZaradi(int moneyFrom, int moneyTo) {
+        this.moneyFrom = moneyFrom;
+        this.moneyTo = moneyTo;
+        izvrsiSveFiltere();
+    }
+
+    private void izvrsiSveFiltere() {
+        spisakTimova = pocetniSpisakTimova.stream()
                 .filter((tim) -> {
-                    return filter.contains(tim.getMenadzer());
-                })
-                .collect(Collectors.toList());
+                    return filter1(tim) && filter2(tim) && filter3(tim);
+                }).collect(Collectors.toList());
 
         fireTableDataChanged();
+    }
+
+    private boolean filter1(Tim tim) {
+        if (hint.isEmpty()) {
+            return true;
+        }
+
+        return tim.getMenadzer().toLowerCase().contains(hint.toLowerCase()) || tim.getNaziv().toLowerCase().contains(hint.toLowerCase());
+    }
+
+    private boolean filter2(Tim tim) {
+        if (filter.isEmpty()) {
+            return true;
+        }
+        return filter.contains(tim.getMenadzer());
+    }
+
+    private boolean filter3(Tim tim) {
+        if (moneyFrom != -1 && moneyTo != -1) {
+            return tim.getZaradjenNovac() > moneyFrom && tim.getZaradjenNovac() < moneyTo;
+        } else if (moneyFrom != -1) {
+            return tim.getZaradjenNovac() > moneyFrom;
+        } else if (moneyTo != -1) {
+            return tim.getZaradjenNovac() < moneyTo;
+        }
+        return true;
     }
 
 }

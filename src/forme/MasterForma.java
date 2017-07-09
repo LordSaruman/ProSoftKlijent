@@ -91,7 +91,9 @@ public class MasterForma extends javax.swing.JDialog {
         UnosRezultata = new javax.swing.JMenu();
         Unos = new javax.swing.JMenuItem();
         OAplikaciji = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         LogOut = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         Settings = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -117,6 +119,11 @@ public class MasterForma extends javax.swing.JDialog {
         AdministracijaTimova.add(IzmenaTimova);
 
         BrisanjeTimova.setText("Brisanje Timova");
+        BrisanjeTimova.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BrisanjeTimovaActionPerformed(evt);
+            }
+        });
         AdministracijaTimova.add(BrisanjeTimova);
 
         PretragaTimova.setText("Pretraga timova");
@@ -163,14 +170,27 @@ public class MasterForma extends javax.swing.JDialog {
         menuBar.add(UnosRezultata);
 
         OAplikaciji.setText("O Aplikaciji");
+
+        jMenuItem1.setText("O Aplikaciji");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        OAplikaciji.add(jMenuItem1);
+
         menuBar.add(OAplikaciji);
 
         LogOut.setText("Log Out");
-        LogOut.addActionListener(new java.awt.event.ActionListener() {
+
+        jMenuItem2.setText("Log out");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogOutActionPerformed(evt);
+                jMenuItem2ActionPerformed(evt);
             }
         });
+        LogOut.add(jMenuItem2);
+
         menuBar.add(LogOut);
 
         Settings.setText("Settings");
@@ -212,10 +232,6 @@ public class MasterForma extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_IzmenaTimovaActionPerformed
 
-    private void LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutActionPerformed
-        GUIKontroler.getInstance().vratiFormu();
-    }//GEN-LAST:event_LogOutActionPerformed
-
     private void PretragaTimovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PretragaTimovaActionPerformed
         JDialog dialog = new PretrragaTimova(null, true);
         dialog.pack();
@@ -245,6 +261,25 @@ public class MasterForma extends javax.swing.JDialog {
             Logger.getLogger(MasterForma.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_UnosActionPerformed
+
+    private void BrisanjeTimovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrisanjeTimovaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BrisanjeTimovaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        try {
+            JDialog dialog = new OAplikaciji(null, true);
+            dialog.pack();
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(MasterForma.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        GUIKontroler.getInstance().vratiFormu();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -306,6 +341,8 @@ public class MasterForma extends javax.swing.JDialog {
     private javax.swing.JMenu UnosRezultata;
     private javax.swing.JMenuItem UnosTimova;
     private javax.swing.JMenuItem UnosTurnira;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 

@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import kontroler.GUIKontroler;
 import table.model.TimoviTableModel;
 
@@ -99,6 +100,11 @@ public class PretrragaTimova extends javax.swing.JDialog {
         jLabel4.setText("Do");
 
         btnPretrazi.setText("Pretrazi");
+        btnPretrazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPretraziActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Pretraga timovi osim po novcu");
 
@@ -233,6 +239,24 @@ public class PretrragaTimova extends javax.swing.JDialog {
         jd.setVisible(true);
     }//GEN-LAST:event_btnManagerActionPerformed
 
+    private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
+        int moneyFrom;
+        try {
+            moneyFrom = Integer.parseInt(txtZarNovacOd.getText().trim());
+        } catch (NumberFormatException exception) {
+            moneyFrom = -1;
+        }
+        int moneyTo;
+        try {
+            moneyTo = Integer.parseInt(txtZarNovDo.getText().trim());
+        } catch (NumberFormatException exception) {
+            moneyTo = -1;
+        }
+
+        TimoviTableModel tableModel = (TimoviTableModel) jTable1.getModel();
+        tableModel.filtirajTabelaPoZaradi(moneyFrom, moneyTo);
+    }//GEN-LAST:event_btnPretraziActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIgre;
@@ -280,5 +304,10 @@ public class PretrragaTimova extends javax.swing.JDialog {
 
         TimoviTableModel tableModel = (TimoviTableModel) jTable1.getModel();
         tableModel.filtrirajPoNecemu(filter);
+    }
+
+    void obrisiManadzerFilter() {
+        TimoviTableModel tableModel = (TimoviTableModel) jTable1.getModel();
+        tableModel.filtrirajPoNecemu(new ArrayList<>());
     }
 }

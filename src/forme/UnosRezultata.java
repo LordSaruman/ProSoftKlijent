@@ -243,7 +243,8 @@ public class UnosRezultata extends javax.swing.JDialog {
             rez.setTim(tim);
             rez.setTurnir(turnir);
             rez.setRezultat(rezultat);
-//            rez.setKorisnik(GUIKontroler.getInstance().);
+            rez.setKorisnik(korisnik);
+
             RezultatiTabelModel rezultatiTabelModel = (RezultatiTabelModel) tabelaRezultat.getModel();
             rezultatiTabelModel.dodajNoviRezultat(rez);
             JOptionPane.showMessageDialog(null, "Uspesno sacuvani rezultati");
@@ -314,7 +315,8 @@ public class UnosRezultata extends javax.swing.JDialog {
     }
 
     private void postaviKorisnika() {
-        //korisnik = KontrolerLogIn.getInstance().postaviUlogovanogKorisnika();
+        korisnik = new Korisnik();
+        korisnik.setUsername(GUIKontroler.getInstance().postaviUlogovanogKorisnika());
     }
 
     private void popuniTabelu() {
