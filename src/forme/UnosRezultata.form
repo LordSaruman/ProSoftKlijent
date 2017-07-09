@@ -263,12 +263,19 @@
         <Component class="javax.swing.JButton" name="btnIzmenaRezultata">
           <Properties>
             <Property name="text" type="java.lang.String" value="Change a result"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIzmenaRezultataActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSacuvajIzmenjen">
           <Properties>
             <Property name="text" type="java.lang.String" value="Save a changed result"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSacuvajIzmenjenActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

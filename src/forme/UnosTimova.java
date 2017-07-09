@@ -6,11 +6,13 @@
 package forme;
 
 import domen.Lokacija;
+import domen.OpstiDomenskiObjekat;
 import domen.Region;
 import domen.Tim;
 import java.awt.Color;
 import static java.lang.Character.isLetter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -442,7 +444,7 @@ public class UnosTimova extends javax.swing.JDialog {
 
     private void comboRegionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRegionActionPerformed
         Region r = (Region) comboRegion.getSelectedItem();
-        popuniListuLokacija(r);
+//        popuniListuLokacija(r);
     }//GEN-LAST:event_comboRegionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -479,22 +481,31 @@ public class UnosTimova extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private ArrayList<Region> vratiListuR() throws Exception {
-        ArrayList<Region> lista = Kontrolor.getInstance().vratiListuRegiona();
+        List<OpstiDomenskiObjekat> list = GUIKontroler.getInstance().vratiListu(new Region());
+        ArrayList<Region> lista = new ArrayList<>();
+        for (OpstiDomenskiObjekat opstiDomenskiObjekat : list) {
+            lista.add((Region) opstiDomenskiObjekat);
+        }
+
         return lista;
     }
 
     private ArrayList<Lokacija> vratiListuL() throws Exception {
-        ArrayList<Lokacija> lista = Kontrolor.getInstance().vratiListuLokacija();
+        List<OpstiDomenskiObjekat> list = GUIKontroler.getInstance().vratiListu(new Lokacija());
+        ArrayList<Lokacija> lista = new ArrayList<>();
+        for (OpstiDomenskiObjekat opstiDomenskiObjekat : list) {
+            lista.add((Lokacija) opstiDomenskiObjekat);
+        }
         return lista;
     }
 
-
-    
-
     private boolean izvrsiValidaciju(String naziv, String trener, String menadzer, String sponzor, Region region, Lokacija lokacija, String igre, String novac) throws Exception {
         boolean validnaForma = true;
-        ArrayList<Tim> listaTimova = GUIKontroler.getInstance().vratiListuTimova();
-
+        ArrayList<Tim> listaTimova = new ArrayList<>();
+        ArrayList<OpstiDomenskiObjekat> list = GUIKontroler.getInstance().vratiListu(new Tim());
+        for (OpstiDomenskiObjekat opstiDomenskiObjekat : list) {
+            listaTimova.add((Tim) opstiDomenskiObjekat);
+        }
         if (naziv == null || naziv.isEmpty()) {
             jlblNazivTImaPoruka.setText("Field for team name is empty.");
             jlblNazivTImaPoruka.setForeground(Color.red);
@@ -551,9 +562,11 @@ public class UnosTimova extends javax.swing.JDialog {
             jlblIgreKojeTimIgraPoruka.setText("");
         }
 
-        if (listaTimova.contains(naziv)) {
-            JOptionPane.showMessageDialog(this, "Team with given name already exist. Please, try another.", "Error", JOptionPane.ERROR_MESSAGE);
-            validnaForma = false;
+        for (Tim tim : listaTimova) {
+            if (tim.getNaziv().equals(naziv)) {
+                JOptionPane.showMessageDialog(this, "Team with given name already exist. Please, try another.", "Error", JOptionPane.ERROR_MESSAGE);
+                validnaForma = false;
+            }
         }
 
         boolean prosao = true;
@@ -594,10 +607,22 @@ public class UnosTimova extends javax.swing.JDialog {
     private void popuniKombove() {
         comboLokacija.removeAllItems();
         comboRegion.removeAllItems();
-        
+
         ArrayList<Lokacija> listaL = new ArrayList<>();
         ArrayList<Region> listaR = new ArrayList<>();
-        
-        listaL = GUIKontroler.getInstance().vratiListu(new Lokacija());
+
+        try {
+            ArrayList<OpstiDomenskiObjekat> listaL2 = GUIKontroler.getInstance().vratiListu(new Lokacija());
+            ArrayList<OpstiDomenskiObjekat> listaR2 = GUIKontroler.getInstance().vratiListu(new Region());
+
+            for (OpstiDomenskiObjekat opstiDomenskiObjekat : listaL2) {
+                listaL.add((Lokacija) opstiDomenskiObjekat);
+            }
+            for (OpstiDomenskiObjekat opstiDomenskiObjekat : listaR2) {
+                listaR.add((Region) opstiDomenskiObjekat);
+            }
+        } catch (Exception ex) {
+        }
+
     }
 }

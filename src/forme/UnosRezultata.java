@@ -6,11 +6,17 @@
 package forme;
 
 import domen.Korisnik;
+import domen.OpstiDomenskiObjekat;
+import domen.Rezultat;
 import domen.Tim;
 import domen.Turnir;
 import java.util.ArrayList;
-import kontrolor.KontrolerLogIn;
-import kontrolor.Kontrolor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import kontroler.GUIKontroler;
+import table.model.RezultatiTabelModel;
 
 /**
  *
@@ -21,17 +27,17 @@ public class UnosRezultata extends javax.swing.JDialog {
     /**
      * Creates new form UnosRezultata
      */
-    
     Korisnik korisnik;
-    private ArrayList<Tim> listaTim;
-    private ArrayList<Turnir> listaTurnir;
-    
+    private ArrayList<Tim> listaTim = new ArrayList<>();
+    private ArrayList<Turnir> listaTurnir = new ArrayList<>();
+
     public UnosRezultata(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
         popuniKombove();
         srediSignedInUser();
         postaviKorisnika();
+        popuniTabelu();
     }
 
     /**
@@ -142,8 +148,19 @@ public class UnosRezultata extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tabelaRezultat);
 
         btnIzmenaRezultata.setText("Change a result");
+        btnIzmenaRezultata.setEnabled(false);
+        btnIzmenaRezultata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzmenaRezultataActionPerformed(evt);
+            }
+        });
 
         btnSacuvajIzmenjen.setText("Save a changed result");
+        btnSacuvajIzmenjen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSacuvajIzmenjenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -221,21 +238,31 @@ public class UnosRezultata extends javax.swing.JDialog {
             Tim tim = (Tim) comboTeam.getSelectedItem();
             Turnir turnir = (Turnir) comboTurnir.getSelectedItem();
             String rezultat = txtRezultat.getText();
-            
-//            if (izvrsiValidaciju(tim, turnir, rezultat) == true) {
-//                tim = vratiTim(naziv, trener, menadzer, sponzor, region, lokacija, igre, novac);
-//                Kontrolor.getInstance().sacuvajTim(tim);
-//                JOptionPane.showMessageDialog(this, "Team has been successfully saved!", "Success", JOptionPane.INFORMATION_MESSAGE);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Team has not been saved.", "Error", JOptionPane.ERROR_MESSAGE);
-//                invalidate();
-//                repaint();
-//                validate();
-//                return;
-//            }
+
+            Rezultat rez = new Rezultat();
+            rez.setTim(tim);
+            rez.setTurnir(turnir);
+            rez.setRezultat(rezultat);
+//            rez.setKorisnik(GUIKontroler.getInstance().);
+            RezultatiTabelModel rezultatiTabelModel = (RezultatiTabelModel) tabelaRezultat.getModel();
+            rezultatiTabelModel.dodajNoviRezultat(rez);
+            JOptionPane.showMessageDialog(null, "Uspesno sacuvani rezultati");
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnSacuvajRezultatActionPerformed
+
+    private void btnIzmenaRezultataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmenaRezultataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnIzmenaRezultataActionPerformed
+
+    private void btnSacuvajIzmenjenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajIzmenjenActionPerformed
+        RezultatiTabelModel rezultatiTabelModel = (RezultatiTabelModel) tabelaRezultat.getModel();
+        try {
+            GUIKontroler.getInstance().sacuvajListuRezultata(rezultatiTabelModel.getSpisakRezultata());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btnSacuvajIzmenjenActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIzmenaRezultata;
@@ -260,14 +287,20 @@ public class UnosRezultata extends javax.swing.JDialog {
     private void popuniKombove() throws Exception {
         comboTeam.removeAllItems();
         comboTurnir.removeAllItems();
-        
-        listaTim = Kontrolor.getInstance().vratiListuTimova();
-        listaTurnir = Kontrolor.getInstance().vratiTurnire();
-        
+
+        ArrayList<OpstiDomenskiObjekat> list = GUIKontroler.getInstance().vratiListu(new Tim());
+        for (OpstiDomenskiObjekat opstiDomenskiObjekat : list) {
+            listaTim.add((Tim) opstiDomenskiObjekat);
+        }
+        list = GUIKontroler.getInstance().vratiListu(new Turnir());
+        for (OpstiDomenskiObjekat opstiDomenskiObjekat : list) {
+            listaTurnir.add((Turnir) opstiDomenskiObjekat);
+        }
+
         for (Tim tim : listaTim) {
             comboTeam.addItem(tim);
         }
-        
+
         for (Turnir turnir : listaTurnir) {
             comboTurnir.addItem(turnir);
         }
@@ -275,12 +308,21 @@ public class UnosRezultata extends javax.swing.JDialog {
 
     private void srediSignedInUser() {
         if (txtSignedUser.getText().isEmpty()) {
-            txtSignedUser.setText(KontrolerLogIn.getInstance().postaviUlogovanogKorisnika());
+            txtSignedUser.setText(GUIKontroler.getInstance().postaviUlogovanogKorisnika());
             txtSignedUser.setEditable(false);
         }
     }
 
     private void postaviKorisnika() {
         //korisnik = KontrolerLogIn.getInstance().postaviUlogovanogKorisnika();
+    }
+
+    private void popuniTabelu() {
+        try {
+            RezultatiTabelModel model = new RezultatiTabelModel(GUIKontroler.getInstance().vratiListu(new Rezultat()));
+            tabelaRezultat.setModel(model);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

@@ -98,7 +98,7 @@ public class PanelInputTextFieldLoginusername extends javax.swing.JPanel impleme
                     konacanUsername = true;
                 }
             } catch (Exception ex) {
-                throw new Exception("Error!");
+                throw new Exception(ex.getMessage());
             }
         }
         return jtxtValue.getText().trim();

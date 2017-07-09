@@ -6,6 +6,7 @@
 package verifikator.login;
 
 import domen.Korisnik;
+import domen.OpstiDomenskiObjekat;
 import java.util.ArrayList;
 import kontroler.GUIKontroler;
 
@@ -34,9 +35,10 @@ public class VerifikatorLogInPassword implements IValidator {
     public boolean validate(Object value) throws Exception {
         String pass = value.toString();
         boolean flag = false;
-        ArrayList<Korisnik> lista = GUIKontroler.getInstance().vratiListuKorisnika();
+        ArrayList<OpstiDomenskiObjekat> lista = GUIKontroler.getInstance().vratiListuKorisnika();
 
-        for (Korisnik korisnik : lista) {
+        for (OpstiDomenskiObjekat odoKorisnik : lista) {
+            Korisnik korisnik = (Korisnik) odoKorisnik;
             if (korisnik.getPassword().equals(pass)) {
                 flag = true;
                 password = korisnik.getPassword();

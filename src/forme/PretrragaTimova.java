@@ -5,6 +5,7 @@
  */
 package forme;
 
+import domen.OpstiDomenskiObjekat;
 import domen.Tim;
 import java.util.ArrayList;
 import java.util.List;
@@ -218,17 +219,17 @@ public class PretrragaTimova extends javax.swing.JDialog {
     }//GEN-LAST:event_txtZarNovDoActionPerformed
 
     private void btnManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManagerActionPerformed
-        List<String> manageri = new ArrayList<String>();
-        
+        List<String> manageri;
+
         try {
-            manageri = Kontrolor.getInstance().vratiListuManagera();
+            manageri = kontroler.GUIKontroler.getInstance().vratiListuManagera();
         } catch (Exception ex) {
             Logger.getLogger(PretrragaTimova.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
-        
+
         JDialog jd = new NaprednaPretraga(null, true, manageri, this);
-        
+
         jd.setVisible(true);
     }//GEN-LAST:event_btnManagerActionPerformed
 
@@ -255,9 +256,13 @@ public class PretrragaTimova extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void initCustomCompoennts() {
-        List<Tim> spisakTimova = null;
+        List<Tim> spisakTimova = new ArrayList<>();
         try {
-            spisakTimova = GUIKontroler.getInstance().vratiListuTimova();
+
+            List<OpstiDomenskiObjekat> list = GUIKontroler.getInstance().vratiListu(new Tim());
+            for (OpstiDomenskiObjekat opstiDomenskiObjekat : list) {
+                spisakTimova.add((Tim) opstiDomenskiObjekat);
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Greska pri vracanju timova iz baze!", "Greska", JOptionPane.ERROR_MESSAGE);
         }
@@ -272,7 +277,7 @@ public class PretrragaTimova extends javax.swing.JDialog {
     }
 
     void filtrirajPoNecemu(List<String> filter) {
-        
+
         TimoviTableModel tableModel = (TimoviTableModel) jTable1.getModel();
         tableModel.filtrirajPoNecemu(filter);
     }

@@ -6,6 +6,7 @@
 package forme;
 
 import domen.Korisnik;
+import domen.OpstiDomenskiObjekat;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -255,7 +256,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
 
         try {
             korisnik = kreirajIIzvrsiValidaciju(name, surname, username, password);
-            GUIKontroler.getInstance().sacuvajKorisnika(korisnik);
+            GUIKontroler.getInstance().sacuvajOpste(korisnik);
             JOptionPane.showMessageDialog(this, "Successful login", "Success", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Unsuccessful login", "Error", JOptionPane.ERROR_MESSAGE);
@@ -293,13 +294,17 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
 
     private Korisnik kreirajIIzvrsiValidaciju(String name, String surname, String username, String password) throws Exception {
         boolean validnaForma = true;
-        ArrayList<Korisnik> lista = GUIKontroler.getInstance().vratiListuKorisnika();
+        ArrayList<OpstiDomenskiObjekat> list = GUIKontroler.getInstance().vratiListu(new Korisnik());
+        ArrayList<Korisnik> lista = new ArrayList<>();
+        for (OpstiDomenskiObjekat opstiDomenskiObjekat : list) {
+            lista.add((Korisnik) opstiDomenskiObjekat);
+        }
 
         if (name == null || name.isEmpty()) {
             jlblPorukaName.setText("Name field is empty");
             jlblPorukaName.setForeground(Color.red);
             validnaForma = false;
-        }else{
+        } else {
             jlblPorukaName.setText("");
         }
 
@@ -307,7 +312,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
             jlblPorukaSurname.setText("Surname field is empty");
             jlblPorukaSurname.setForeground(Color.red);
             validnaForma = false;
-        }else{
+        } else {
             jlblPorukaSurname.setText("");
         }
 
@@ -315,7 +320,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
             jlblPorukaUsername.setText("Username field is empty");
             jlblPorukaUsername.setForeground(Color.red);
             validnaForma = false;
-        }else{
+        } else {
             jlblPorukaUsername.setText("");
         }
 
@@ -323,7 +328,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
             jlblPorukaPassword.setText("Password field is empty");
             jlblPorukaPassword.setForeground(Color.red);
             validnaForma = false;
-        }else{
+        } else {
             jlblPorukaPassword.setText("");
         }
 

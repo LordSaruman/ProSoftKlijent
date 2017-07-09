@@ -24,6 +24,7 @@ public class Komunikacija {
     Socket s;
 
     private Komunikacija() {
+        poveziSe("localhost", 9000);
     }
 
     public static Komunikacija getInstance() {
