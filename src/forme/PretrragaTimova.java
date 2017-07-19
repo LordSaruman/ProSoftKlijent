@@ -61,8 +61,9 @@ public class PretrragaTimova extends javax.swing.JDialog {
         btnIgre = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("[CSGO] Advanced Search");
 
-        jLabel1.setText("Serarch");
+        jLabel1.setText("Search:");
 
         txtSearchInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -83,11 +84,11 @@ public class PretrragaTimova extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Napredna pretraga"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "Advanced Search\n"));
         jPanel1.setToolTipText("");
         jPanel1.setName(""); // NOI18N
 
-        jLabel2.setText("Zaradjen novac:");
+        jLabel2.setText("Earned money:");
 
         txtZarNovDo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,20 +96,20 @@ public class PretrragaTimova extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setText("Od");
+        jLabel3.setText("From:");
 
-        jLabel4.setText("Do");
+        jLabel4.setText("To:");
 
-        btnPretrazi.setText("Pretrazi");
+        btnPretrazi.setText("Search");
         btnPretrazi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPretraziActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("Pretraga timovi osim po novcu");
+        jLabel5.setText("Search the Teams using other criteria:");
 
-        btnManager.setText("Izaberi managere");
+        btnManager.setText("Choose the Managers");
         btnManager.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManagerActionPerformed(evt);
@@ -117,9 +118,9 @@ public class PretrragaTimova extends javax.swing.JDialog {
 
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        btnSponzor.setText("Izaberi sponzore");
+        btnSponzor.setText("Choose the Sponsors");
 
-        btnIgre.setText("Izaberi igre");
+        btnIgre.setText("Choose the games");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -235,6 +236,7 @@ public class PretrragaTimova extends javax.swing.JDialog {
         }
 
         JDialog jd = new NaprednaPretraga(null, true, manageri, this);
+        jd.setLocationRelativeTo(null);
 
         jd.setVisible(true);
     }//GEN-LAST:event_btnManagerActionPerformed

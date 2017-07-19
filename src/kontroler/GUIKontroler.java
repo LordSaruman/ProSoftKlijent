@@ -9,7 +9,6 @@ import domen.Korisnik;
 import domen.OpstiDomenskiObjekat;
 import domen.Tim;
 import forme.PocetnaForma;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -31,6 +30,7 @@ public class GUIKontroler {
 
     private static GUIKontroler instance;
     private ArrayList<OpstiDomenskiObjekat> listaKorisnika = null;
+    private ArrayList<OpstiDomenskiObjekat> listaUlogovanihKorisnika = new ArrayList<>();
     private String imeIPrezime = "";
     private Korisnik korisnik;
 
@@ -75,6 +75,14 @@ public class GUIKontroler {
             if (korisnik.getUsername().equals(usernameName) && korisnik.getPassword().equals(password)) {
                 if (imeIPrezime.isEmpty()) {
                     imeIPrezime += korisnik.getImeKorisnika() + " " + korisnik.getPrezimeKorisnika();
+                    if (!listaUlogovanihKorisnika.contains(korisnik)) {
+                        listaUlogovanihKorisnika.add(korisnik);
+                        try {
+                            posaljiListuUlogovanihKorisnika();
+                        } catch (Exception ex) {
+                            Logger.getLogger(GUIKontroler.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
             }
         }
@@ -135,4 +143,17 @@ public class GUIKontroler {
             throw new Exception("Doslo je do greske");
         }
     }
+
+    private void posaljiListuUlogovanihKorisnika() throws Exception {
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacija.PROSLEDI_LISTU_ULOGOVANIH_KORISNIKA);
+        kz.setParametar(listaUlogovanihKorisnika);
+        Komunikacija.getInstance().posaljiZahtev(kz);
+        
+        ServerskiOdgovor so = Komunikacija.getInstance().primiOdgovor();
+        if (so.getStatusZahteva() != StatusZahteva.USPESAN_ZAHTEV) {
+            throw new Exception("Doslo je do greske");
+        }
+    }
+
 }

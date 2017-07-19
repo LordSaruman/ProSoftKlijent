@@ -34,7 +34,7 @@ public class OAplikaciji extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] O Aplikaciji");
 
-        jPanelOAplikaciji.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "O aplikaciji"));
+        jPanelOAplikaciji.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "About the Application\n"));
 
         javax.swing.GroupLayout jPanelOAplikacijiLayout = new javax.swing.GroupLayout(jPanelOAplikaciji);
         jPanelOAplikaciji.setLayout(jPanelOAplikacijiLayout);
@@ -47,7 +47,7 @@ public class OAplikaciji extends javax.swing.JDialog {
             .addGap(0, 302, Short.MAX_VALUE)
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "O autoru"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED), "About the Author\n"));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
