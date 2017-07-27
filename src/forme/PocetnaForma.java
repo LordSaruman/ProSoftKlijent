@@ -5,9 +5,6 @@
  */
 package forme;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -160,7 +157,6 @@ public class PocetnaForma extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        JFrame jf = new PocetnaForma();
         PocetnaForma.this.setVisible(false);
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed

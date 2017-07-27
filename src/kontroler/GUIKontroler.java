@@ -8,6 +8,8 @@ package kontroler;
 import domen.Korisnik;
 import domen.OpstiDomenskiObjekat;
 import domen.Tim;
+import forme.LoginForma;
+import forme.MasterForma;
 import forme.PocetnaForma;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +32,12 @@ public class GUIKontroler {
 
     private static GUIKontroler instance;
     private ArrayList<OpstiDomenskiObjekat> listaKorisnika = null;
-    private ArrayList<OpstiDomenskiObjekat> listaUlogovanihKorisnika = new ArrayList<>();
+    private ArrayList<OpstiDomenskiObjekat> listaUlogovanihKorisnika;
     private String imeIPrezime = "";
     private Korisnik korisnik;
 
     private GUIKontroler() {
+        listaUlogovanihKorisnika = new ArrayList<>();
     }
 
     public static GUIKontroler getInstance() {
@@ -45,6 +48,8 @@ public class GUIKontroler {
     }
 
     private static PocetnaForma pocetnaForma;
+    private static LoginForma loginForma;
+    private static MasterForma masterForma; 
 
     public void postaviInstancuForme(JFrame pocetna) {
         pocetnaForma = (PocetnaForma) pocetna;
@@ -57,6 +62,15 @@ public class GUIKontroler {
     public void vratiFormu() {
         pocetnaForma.setVisible(true);
     }
+    
+    public void ugasiLoginFormu(){
+        loginForma.setVisible(false);
+    }
+    
+    public void ugasiMasterFormu(){
+        masterForma.setVisible(false);
+    }
+    
 
     public ArrayList<OpstiDomenskiObjekat> vratiListuKorisnika() throws Exception {
         if (listaKorisnika == null) {
@@ -71,19 +85,20 @@ public class GUIKontroler {
         String password = VerifikatorLogInPassword.getInstance().password;
 
         for (OpstiDomenskiObjekat odoKorisnik : listaKorisnika) {
-            Korisnik korisnik = (Korisnik) odoKorisnik;
+            korisnik = (Korisnik) odoKorisnik;
             if (korisnik.getUsername().equals(usernameName) && korisnik.getPassword().equals(password)) {
                 if (imeIPrezime.isEmpty()) {
                     imeIPrezime += korisnik.getImeKorisnika() + " " + korisnik.getPrezimeKorisnika();
-                    if (!listaUlogovanihKorisnika.contains(korisnik)) {
-                        listaUlogovanihKorisnika.add(korisnik);
-                        try {
-                            posaljiListuUlogovanihKorisnika();
-                        } catch (Exception ex) {
-                            Logger.getLogger(GUIKontroler.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
+
                 }
+            }
+        }
+        if (!listaUlogovanihKorisnika.contains(korisnik)) {
+            listaUlogovanihKorisnika.add(korisnik);
+            try {
+                posaljiListuUlogovanihKorisnika();
+            } catch (Exception ex) {
+                Logger.getLogger(GUIKontroler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return imeIPrezime;
@@ -149,11 +164,15 @@ public class GUIKontroler {
         kz.setOperacija(Operacija.PROSLEDI_LISTU_ULOGOVANIH_KORISNIKA);
         kz.setParametar(listaUlogovanihKorisnika);
         Komunikacija.getInstance().posaljiZahtev(kz);
-        
+
         ServerskiOdgovor so = Komunikacija.getInstance().primiOdgovor();
         if (so.getStatusZahteva() != StatusZahteva.USPESAN_ZAHTEV) {
             throw new Exception("Doslo je do greske");
         }
+    }
+
+    public void izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika() {
+        listaUlogovanihKorisnika.remove(korisnik);
     }
 
 }

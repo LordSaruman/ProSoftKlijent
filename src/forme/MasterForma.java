@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.time.Clock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -93,13 +94,11 @@ public class MasterForma extends javax.swing.JDialog {
         OAplikaciji = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         LogOut = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
         Settings = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] Main Menu");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(getMaximumSize());
 
         AdministracijaTimova.setText("Team Administration");
 
@@ -183,15 +182,16 @@ public class MasterForma extends javax.swing.JDialog {
         menuBar.add(OAplikaciji);
 
         LogOut.setText("Log Out");
-
-        jMenuItem2.setText("Log out");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+        LogOut.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LogOutMouseClicked(evt);
             }
         });
-        LogOut.add(jMenuItem2);
-
+        LogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogOutActionPerformed(evt);
+            }
+        });
         menuBar.add(LogOut);
 
         Settings.setText("Settings");
@@ -278,9 +278,28 @@ public class MasterForma extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        GUIKontroler.getInstance().vratiFormu();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutActionPerformed
+        int reply = JOptionPane.showConfirmDialog(this, "Do you really want to Log out?", "Info", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, "Goodbye.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            GUIKontroler.getInstance().ugasiPocetnuFormu();
+            GUIKontroler.getInstance().izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika();
+            GUIKontroler.getInstance().vratiFormu();
+        } else {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_LogOutActionPerformed
+
+    private void LogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogOutMouseClicked
+        int reply = JOptionPane.showConfirmDialog(this, "Do you really want to Log out?", "Info", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(this, "Goodbye.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            GUIKontroler.getInstance().izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika();
+            GUIKontroler.getInstance().ugasiLoginFormu();
+            GUIKontroler.getInstance().ugasiMasterFormu();
+            GUIKontroler.getInstance().vratiFormu();
+        }
+    }//GEN-LAST:event_LogOutMouseClicked
 
     /**
      * @param args the command line arguments
@@ -343,7 +362,6 @@ public class MasterForma extends javax.swing.JDialog {
     private javax.swing.JMenuItem UnosTimova;
     private javax.swing.JMenuItem UnosTurnira;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 
