@@ -5,36 +5,45 @@
  */
 package login.panel;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.logging.Logger;
 import verifikator.login.IValidator;
 
 /**
  *
  * @author filip_000
  */
-public class PanelInputTextFieldLogInPassword extends javax.swing.JPanel implements IGetValue{
+public class PanelInputTextFieldLogInPassword extends javax.swing.JPanel implements IGetValue, ActionListener {
 
     public static boolean konacanPassword = false;
     private IValidator validator;
+    String pass;
+    private static String LogIn = "Log in";
+
     /**
      * Creates new form PanelInputTextFieldLogin
      */
     public PanelInputTextFieldLogInPassword() {
         initComponents();
+        passField.setActionCommand(LogIn);
+        passField.addActionListener(this);
     }
-    
-    public void setText(String text){
+
+    public void setText(String text) {
         jlabelText.setText(text);
     }
-    
-    public void setValue(String value){
-        jtxtValue.setText(value);
+
+    public void setValue(String value) {
+        passField.setText(value);
     }
-    
-    public void setError(String error){
+
+    public void setError(String error) {
         jlabelError.setText(error);
     }
-    
-    public void setValidator (IValidator validator){
+
+    public void setValidator(IValidator validator) {
         this.validator = validator;
     }
 
@@ -48,13 +57,15 @@ public class PanelInputTextFieldLogInPassword extends javax.swing.JPanel impleme
     private void initComponents() {
 
         jlabelText = new javax.swing.JLabel();
-        jtxtValue = new javax.swing.JTextField();
         jlabelError = new javax.swing.JLabel();
+        passField = new javax.swing.JPasswordField();
 
         jlabelText.setText("jLabel1");
 
         jlabelError.setForeground(new java.awt.Color(255, 0, 0));
         jlabelError.setText("jLabel2");
+
+        passField.setText("jPasswordField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -66,8 +77,8 @@ public class PanelInputTextFieldLogInPassword extends javax.swing.JPanel impleme
                     .addComponent(jlabelError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlabelText)
-                        .addGap(33, 33, 33)
-                        .addComponent(jtxtValue, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(39, 39, 39)
+                        .addComponent(passField, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -76,7 +87,7 @@ public class PanelInputTextFieldLogInPassword extends javax.swing.JPanel impleme
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlabelText)
-                    .addComponent(jtxtValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jlabelError)
                 .addContainerGap())
@@ -85,27 +96,54 @@ public class PanelInputTextFieldLogInPassword extends javax.swing.JPanel impleme
 
     @Override
     public Object getValue() throws Exception {
-        if(validator != null){
-            try{
+        if (validator != null) {
+            try {
                 boolean flag = false;
-                flag = validator.validate(jtxtValue.getText().trim());
-                if(flag == false){
+                //proveriti preko kompajlera
+                String stringPass = new String(passField.getPassword());
+                pass = new String(stringPass);
+                //**provera
+                flag = validator.validate(stringPass);
+                if (flag == false) {
                     jlabelError.setText("Password is not valid.");
-                }else{
+                } else {
                     jlabelError.setText("");
                     konacanPassword = true;
                 }
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 jlabelError.setText(ex.getMessage());
                 throw new Exception("Error!");
             }
         }
-        return jtxtValue.getText().trim();
+        return pass;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jlabelError;
     private javax.swing.JLabel jlabelText;
-    private javax.swing.JTextField jtxtValue;
+    private javax.swing.JPasswordField passField;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String cmd = e.getActionCommand();
+        char[] passJP = passField.getPassword();
+        
+        if (LogIn.equals(cmd)) {
+            try {
+                getValue();
+            } catch (Exception ex) {
+                jlabelError.setText(ex.getMessage());
+
+            }
+        }
+
+        Arrays.fill(passJP, '0');
+        passField.selectAll();
+        resetFocus();
+    }
+
+    private void resetFocus() {
+        passField.requestFocusInWindow();
+    }
 }

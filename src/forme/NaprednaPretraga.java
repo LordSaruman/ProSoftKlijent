@@ -48,7 +48,7 @@ public class NaprednaPretraga extends javax.swing.JDialog {
         btnObrisiFilter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Napredna pretraga");
+        setTitle("Advanced Search");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -63,21 +63,21 @@ public class NaprednaPretraga extends javax.swing.JDialog {
 
         jScrollPane1.setViewportView(jPanel1);
 
-        btnOdustani.setText("Odustani");
+        btnOdustani.setText("Close");
         btnOdustani.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOdustaniActionPerformed(evt);
             }
         });
 
-        btnPrimeniPretragu.setText("Primeni pretragu");
+        btnPrimeniPretragu.setText("Use the Search");
         btnPrimeniPretragu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrimeniPretraguActionPerformed(evt);
             }
         });
 
-        btnObrisiFilter.setText("Obrisi mrtvi filter");
+        btnObrisiFilter.setText("Delete the Filter");
         btnObrisiFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnObrisiFilterActionPerformed(evt);

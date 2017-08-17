@@ -8,13 +8,21 @@ package forme;
 import domen.Korisnik;
 import domen.OpstiDomenskiObjekat;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
+import komunikacija.Komunikacija;
 import kontroler.GUIKontroler;
+import operacije.Operacija;
+import transfer.KlijentskiZahtev;
+import transfer.ServerskiOdgovor;
+import transfer.StatusZahteva;
 
 /**
  *
@@ -41,8 +49,9 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
     public SignUp(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        srediPasswordField();
         passwordField = new JPasswordField(10);
+        passwordField.setEchoChar('*');
+        srediPasswordField();
         passwordField.setActionCommand(hideAndReveal);
         passwordField.addActionListener(this);
     }
@@ -247,20 +256,47 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String name = txtName.getText().trim();
-        String surname = txtSurname.getText().trim();
-        String username = txtUsername.getText().trim();
-        String password = txtPassword.getText().trim();
-
-        Korisnik korisnik;
-
         try {
-            korisnik = kreirajIIzvrsiValidaciju(name, surname, username, password);
-            GUIKontroler.getInstance().sacuvajOpste(korisnik);
-            JOptionPane.showMessageDialog(this, "Successful login", "Success", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Unsuccessful login", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            String name = txtName.getText().trim();
+            String surname = txtSurname.getText().trim();
+            String username = txtUsername.getText().trim();
+            String password = txtPassword.getText().trim();
+
+            Korisnik korisnik;
+
+            try {
+
+                if (kreirajIIzvrsiValidaciju(name, surname, username, password) == true) {
+                    korisnik = vratiKorisnika(name, surname, username, password);
+
+                    KlijentskiZahtev kz = new KlijentskiZahtev();
+                    kz.setOperacija(Operacija.SACUVAJ);
+                    kz.setParametar(korisnik);
+                    Komunikacija.getInstance().posaljiZahtev(kz);
+                    srediTextField();
+
+                    ServerskiOdgovor so = Komunikacija.getInstance().primiOdgovor();
+                    if (so.getStatusZahteva() == StatusZahteva.USPESAN_ZAHTEV) {
+                        JOptionPane.showMessageDialog(this, "Successful sign up!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                        setVisible(false);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Unsuccessful sign up.", "Error", JOptionPane.ERROR_MESSAGE);
+                        invalidate();
+                        repaint();
+                        validate();
+                        return;
+                    }
+
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Unsuccessful sign up.", "Error", JOptionPane.ERROR_MESSAGE);
+                invalidate();
+                repaint();
+                validate();
+                return;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UnosTimova.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -292,7 +328,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    private Korisnik kreirajIIzvrsiValidaciju(String name, String surname, String username, String password) throws Exception {
+    private boolean kreirajIIzvrsiValidaciju(String name, String surname, String username, String password) throws Exception {
         boolean validnaForma = true;
         ArrayList<OpstiDomenskiObjekat> list = GUIKontroler.getInstance().vratiListu(new Korisnik());
         ArrayList<Korisnik> lista = new ArrayList<>();
@@ -333,18 +369,25 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
         }
 
         for (Korisnik korisnik : lista) {
-            if (korisnik.getUsername().equals(username) && korisnik.getPassword().equals(password)) {
-                JOptionPane.showMessageDialog(this, "Invalid username and password. They are already used by another user. Please, use another username and password", "Error", JOptionPane.ERROR_MESSAGE);
+            if (korisnik.getUsername().equals(username)) {
+                JOptionPane.showMessageDialog(this, "Invalid username. It's already used by another user. Please, use another username", "Error", JOptionPane.ERROR_MESSAGE);
                 validnaForma = false;
             }
         }
 
-        if (!validnaForma) {
-            SignUp.getInstance().repaint();
-            SignUp.getInstance().revalidate();
+        char[] input = passwordField.getPassword();
+        if (!akoJeSifraDobra(input) == true) {
+            jlblPorukaPassword.setText("Password doesn't contain all the necessery special charachters");
+            jlblPorukaPassword.setForeground(Color.red);
+        } else {
+            jlblPorukaPassword.setText("");
         }
 
-        return new Korisnik(idKorisnika, name, surname, username, password);
+        if (!validnaForma) {
+            JOptionPane.showMessageDialog(this, "You didn't provide info for all fields on the form or you have some input errors.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
     private void srediPasswordField() {
@@ -356,28 +399,18 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         String cmd = ae.getActionCommand();
         if (hideAndReveal.equals(cmd)) {
-            char[] input = passwordField.getPassword();
-            if (akoJeSifraDobra(input)) {
-                JOptionPane.showMessageDialog(this, "Success! You typed the valid password", "Success", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Error! Invalid password. Try again", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            Arrays.fill(input, '0');
-            passwordField.selectAll();
-            resetFocus();
-
+            passwordField.setEchoChar((char)0);
         }
     }
 
     //mora da sadrzi najmanje 8 karaktera, jedno veliko slovo, jedan znak
     private boolean akoJeSifraDobra(char[] input) {
         boolean flag = true;
-        String password = "";
+        String password = new String(input);
         //String[] mark = {"!", "/", "*", "-", "+", ",", ".", "`", "@", "#", "$", "%", "^", "&", "(", ")", "_", "?", "<", ">", "|",};
-
-        for (char c : input) {
-            password += c;
-        }
+//        for (char c : input) {
+//            password += c;
+//        }
 
         boolean hasUppercase = !password.equals(password.toUpperCase());
         boolean hasLowercase = !password.equals(password.toLowerCase());
@@ -406,6 +439,17 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
 
     private void resetFocus() {
         passwordField.requestFocusInWindow();
+    }
+
+    private Korisnik vratiKorisnika(String name, String surname, String username, String password) {
+        return new Korisnik(idKorisnika, name, surname, username, password);
+    }
+
+    private void srediTextField() {
+        char[] input = passwordField.getPassword();
+        Arrays.fill(input, '0');
+        passwordField.selectAll();
+        resetFocus();
     }
 
 }

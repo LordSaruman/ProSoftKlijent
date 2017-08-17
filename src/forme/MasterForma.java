@@ -99,10 +99,11 @@ public class MasterForma extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] Main Menu");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setPreferredSize(getMaximumSize());
 
-        AdministracijaTimova.setText("Administracija Timova");
+        AdministracijaTimova.setText("Team Administration");
 
-        UnosTimova.setText("Unos Timova");
+        UnosTimova.setText("Insert Team");
         UnosTimova.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UnosTimovaActionPerformed(evt);
@@ -110,7 +111,7 @@ public class MasterForma extends javax.swing.JDialog {
         });
         AdministracijaTimova.add(UnosTimova);
 
-        IzmenaTimova.setText("Izmena Timova");
+        IzmenaTimova.setText("Change a Team");
         IzmenaTimova.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IzmenaTimovaActionPerformed(evt);
@@ -118,7 +119,7 @@ public class MasterForma extends javax.swing.JDialog {
         });
         AdministracijaTimova.add(IzmenaTimova);
 
-        BrisanjeTimova.setText("Brisanje Timova");
+        BrisanjeTimova.setText("Delete a Team");
         BrisanjeTimova.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BrisanjeTimovaActionPerformed(evt);
@@ -126,7 +127,7 @@ public class MasterForma extends javax.swing.JDialog {
         });
         AdministracijaTimova.add(BrisanjeTimova);
 
-        PretragaTimova.setText("Pretraga timova");
+        PretragaTimova.setText("Search Teams");
         PretragaTimova.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PretragaTimovaActionPerformed(evt);
@@ -136,30 +137,30 @@ public class MasterForma extends javax.swing.JDialog {
 
         menuBar.add(AdministracijaTimova);
 
-        AdministracijaTurnira.setText("Administracija Turnira");
+        AdministracijaTurnira.setText("Tournament Administration");
 
-        UnosTurnira.setText("Unos Turnira");
+        UnosTurnira.setText("Insert a Torunament");
         AdministracijaTurnira.add(UnosTurnira);
 
-        PretragaTurnira.setText("Pretraga Turnira");
+        PretragaTurnira.setText("Search of Tournaments");
         AdministracijaTurnira.add(PretragaTurnira);
 
-        BrisanjeTurnira.setText("Brisanje Turnira");
+        BrisanjeTurnira.setText("Deleting of Tournament");
         AdministracijaTurnira.add(BrisanjeTurnira);
 
-        IzmenaTurnira.setText("Izmena Turnira");
+        IzmenaTurnira.setText("Changing a Tournament");
         AdministracijaTurnira.add(IzmenaTurnira);
 
         menuBar.add(AdministracijaTurnira);
 
-        UnosRezultata.setText("Unos Rezultata");
+        UnosRezultata.setText("Insert of Results");
         UnosRezultata.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UnosRezultataActionPerformed(evt);
             }
         });
 
-        Unos.setText("Unos");
+        Unos.setText("Insert ");
         Unos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UnosActionPerformed(evt);
@@ -169,9 +170,9 @@ public class MasterForma extends javax.swing.JDialog {
 
         menuBar.add(UnosRezultata);
 
-        OAplikaciji.setText("O Aplikaciji");
+        OAplikaciji.setText("About Application");
 
-        jMenuItem1.setText("O Aplikaciji");
+        jMenuItem1.setText("About an Author and Application");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);

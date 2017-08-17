@@ -11,9 +11,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javax.swing.JOptionPane;
 import kontroler.GUIKontroler;
 import login.panel.PanelInputTextFieldLogInPassword;
@@ -54,7 +51,7 @@ public class LoginForma extends javax.swing.JDialog implements ActionListener {
         jPanelUnosPodataka = new javax.swing.JPanel();
         btnLogIn = new javax.swing.JButton();
         panelInputTextFieldLoginusername1 = new login.panel.PanelInputTextFieldLoginusername();
-        panelInputTextFieldLogInPassword1 = new login.panel.PanelInputTextFieldLogInPassword();
+        panelInputTextFieldLogInPassword2 = new login.panel.PanelInputTextFieldLogInPassword();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] Login form\n");
@@ -70,12 +67,6 @@ public class LoginForma extends javax.swing.JDialog implements ActionListener {
             }
         });
 
-        panelInputTextFieldLogInPassword1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                panelInputTextFieldLogInPassword1KeyPressed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanelUnosPodatakaLayout = new javax.swing.GroupLayout(jPanelUnosPodataka);
         jPanelUnosPodataka.setLayout(jPanelUnosPodatakaLayout);
         jPanelUnosPodatakaLayout.setHorizontalGroup(
@@ -84,22 +75,23 @@ public class LoginForma extends javax.swing.JDialog implements ActionListener {
                 .addGroup(jPanelUnosPodatakaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelUnosPodatakaLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanelUnosPodatakaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(panelInputTextFieldLogInPassword1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelInputTextFieldLoginusername1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(panelInputTextFieldLoginusername1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelUnosPodatakaLayout.createSequentialGroup()
                         .addGap(200, 200, 200)
-                        .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelUnosPodatakaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(panelInputTextFieldLogInPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         jPanelUnosPodatakaLayout.setVerticalGroup(
             jPanelUnosPodatakaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelUnosPodatakaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelInputTextFieldLoginusername1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(panelInputTextFieldLogInPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(13, 13, 13)
+                .addComponent(panelInputTextFieldLogInPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -127,20 +119,16 @@ public class LoginForma extends javax.swing.JDialog implements ActionListener {
         }
     }//GEN-LAST:event_btnLogInActionPerformed
 
-    private void panelInputTextFieldLogInPassword1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_panelInputTextFieldLogInPassword1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_panelInputTextFieldLogInPassword1KeyPressed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogIn;
     private javax.swing.JPanel jPanelUnosPodataka;
-    private login.panel.PanelInputTextFieldLogInPassword panelInputTextFieldLogInPassword1;
+    private login.panel.PanelInputTextFieldLogInPassword panelInputTextFieldLogInPassword2;
     private login.panel.PanelInputTextFieldLoginusername panelInputTextFieldLoginusername1;
     // End of variables declaration//GEN-END:variables
 
     private void srediSvePanele() {
         srediPanel(panelInputTextFieldLoginusername1, "Username", "", "");
-        srediPanel(panelInputTextFieldLogInPassword1, "Password", "", "");
+        srediPanel(panelInputTextFieldLogInPassword2, "Password", "", "");
     }
 
     private void srediPanel(PanelInputTextFieldLogInPassword panel, String text, String value, String error) {
@@ -157,12 +145,12 @@ public class LoginForma extends javax.swing.JDialog implements ActionListener {
 
     private void setValidator() {
         panelInputTextFieldLoginusername1.setValidator(VerifikatorLogInUsername.getInstance());
-        panelInputTextFieldLogInPassword1.setValidator(VerifikatorLogInPassword.getInstance());
+        panelInputTextFieldLogInPassword2.setValidator(VerifikatorLogInPassword.getInstance());
     }
 
     private void proslediUneteVrednostiValidatoru() throws Exception {
         String username = panelInputTextFieldLoginusername1.getValue().toString();
-        String password = panelInputTextFieldLogInPassword1.getValue().toString();
+        String password = panelInputTextFieldLogInPassword2.getValue().toString();
     }
 
     @Override
