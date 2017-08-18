@@ -19,7 +19,7 @@ public class TimoviTableModel extends AbstractTableModel {
 
     private List<Tim> pocetniSpisakTimova;
     private List<Tim> spisakTimova;
-    private String[] tableColumns = new String[]{"naziv", "menadzer", "sponzor"};
+    private String[] tableColumns = new String[]{"Team Name", "Manager", "Sponsor"};
 
     public TimoviTableModel(List<Tim> spisakTimova) {
         this.spisakTimova = spisakTimova == null ? new ArrayList<>() : spisakTimova;

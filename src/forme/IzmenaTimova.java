@@ -138,6 +138,12 @@ public class IzmenaTimova extends javax.swing.JDialog {
 
         jlblIgreKojeTimIgraPoruka.setForeground(new java.awt.Color(255, 0, 0));
 
+        comboNazivTima.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboNazivTimaItemStateChanged(evt);
+            }
+        });
+
         btnIzmeni.setText("Change the data");
         btnIzmeni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -356,6 +362,10 @@ public class IzmenaTimova extends javax.swing.JDialog {
         txtFieldTrener.setEnabled(true);
         txtFieldZaradjenNovac.setEnabled(true);
     }//GEN-LAST:event_btnIzmeniActionPerformed
+
+    private void comboNazivTimaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboNazivTimaItemStateChanged
+        
+    }//GEN-LAST:event_comboNazivTimaItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIzmeni;

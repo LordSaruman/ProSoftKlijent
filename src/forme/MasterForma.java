@@ -95,6 +95,7 @@ public class MasterForma extends javax.swing.JDialog {
         LogOut = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         Settings = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] Main Menu");
@@ -195,6 +196,10 @@ public class MasterForma extends javax.swing.JDialog {
         menuBar.add(LogOut);
 
         Settings.setText("Settings");
+
+        jMenuItem3.setText("Database Configuration");
+        Settings.add(jMenuItem3);
+
         menuBar.add(Settings);
 
         setJMenuBar(menuBar);
@@ -344,6 +349,7 @@ public class MasterForma extends javax.swing.JDialog {
     private javax.swing.JMenuItem UnosTurnira;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 
