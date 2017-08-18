@@ -258,7 +258,7 @@ public class IzmenaTimova extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jlblIgreKojeTimIgraPoruka)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnIzmeni)
                     .addComponent(btnSacuvajTim))
                 .addGap(21, 21, 21))
