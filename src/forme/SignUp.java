@@ -50,7 +50,6 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
         initComponents();
         passwordField = new JPasswordField(10);
         passwordField.setEchoChar('*');
-        srediPasswordField();
         passwordField.setActionCommand(hideAndReveal);
         passwordField.addActionListener(this);
     }
@@ -70,7 +69,6 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
         txtPassword = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        btnRevelaHide = new javax.swing.JButton();
         jlblPorukaName = new javax.swing.JLabel();
         jlblPorukaSurname = new javax.swing.JLabel();
         jlblPorukaUsername = new javax.swing.JLabel();
@@ -105,18 +103,6 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        btnRevelaHide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/forme/slike/eyeFinal.jpg"))); // NOI18N
-        btnRevelaHide.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRevelaHideActionPerformed(evt);
-            }
-        });
-        btnRevelaHide.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnRevelaHideKeyPressed(evt);
             }
         });
 
@@ -164,14 +150,8 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlblPorukaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnRevelaHide, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 891, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -199,16 +179,12 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel6)
-                                        .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(36, 36, 36))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(btnRevelaHide, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addGap(35, 35, 35)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6)
+                                    .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(36, 36, 36))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(42, 42, 42)))
@@ -299,16 +275,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btnRevelaHideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRevelaHideActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRevelaHideActionPerformed
-
-    private void btnRevelaHideKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnRevelaHideKeyPressed
-
-    }//GEN-LAST:event_btnRevelaHideKeyPressed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRevelaHide;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -389,10 +356,6 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
         return true;
     }
 
-    private void srediPasswordField() {
-        btnRevelaHide.setActionCommand(hideAndReveal);
-        btnRevelaHide.addActionListener(this);
-    }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
@@ -407,9 +370,9 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
         boolean flag = true;
         String password = new String(input);
         //String[] mark = {"!", "/", "*", "-", "+", ",", ".", "`", "@", "#", "$", "%", "^", "&", "(", ")", "_", "?", "<", ">", "|",};
-//        for (char c : input) {
-//            password += c;
-//        }
+        for (char c : input) {
+            password += c;
+        }
 
         boolean hasUppercase = !password.equals(password.toUpperCase());
         boolean hasLowercase = !password.equals(password.toLowerCase());

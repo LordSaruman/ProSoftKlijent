@@ -6,6 +6,8 @@
 package forme;
 
 import domen.Tim;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +32,7 @@ public class IzmenaTimova extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         popuniComboNazivTimova();
+        srediTextFieldSignedIn();
     }
 
     /**
@@ -68,7 +71,8 @@ public class IzmenaTimova extends javax.swing.JDialog {
         btnIzmeni = new javax.swing.JButton();
         lblRegionPoruka = new javax.swing.JLabel();
         lblLokacijaPoruka = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtFieldSignedUser = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] Change a Team");
@@ -138,17 +142,16 @@ public class IzmenaTimova extends javax.swing.JDialog {
 
         jlblIgreKojeTimIgraPoruka.setForeground(new java.awt.Color(255, 0, 0));
 
+        comboNazivTima.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboNazivTimaItemStateChanged(evt);
+            }
+        });
+
         btnIzmeni.setText("Change the data");
         btnIzmeni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIzmeniActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Load the data of the team");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -157,9 +160,9 @@ public class IzmenaTimova extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -200,13 +203,12 @@ public class IzmenaTimova extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jlblIgreKojeTimIgraPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jlblIgreKojeTimIgraPoruka, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnIzmeni)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSacuvajTim)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -259,13 +261,14 @@ public class IzmenaTimova extends javax.swing.JDialog {
                         .addComponent(txtFieldZaradjenNovac, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlblZaradjenNovacPoruka, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSacuvajTim)
                     .addComponent(btnIzmeni)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSacuvajTim))
+                .addGap(33, 33, 33))
         );
+
+        jLabel7.setText("Signed in user:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -275,13 +278,25 @@ public class IzmenaTimova extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(txtFieldSignedUser, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel7))
+                    .addComponent(txtFieldSignedUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -319,7 +334,26 @@ public class IzmenaTimova extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbDota2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
+        jcbCSGO.setEnabled(true);
+        jcbDota2.setEnabled(true);
+        txtFieldLokacija.setEnabled(true);
+        txtFieldMenadzer.setEnabled(true);
+        txtFieldRegion.setEnabled(true);
+        txtFieldSponzor.setEnabled(true);
+        txtFieldTrener.setEnabled(true);
+        txtFieldZaradjenNovac.setEnabled(true);
+    }//GEN-LAST:event_btnIzmeniActionPerformed
+
+    private void comboNazivTimaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboNazivTimaItemStateChanged
+
+        comboNazivTima.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                System.out.println(e.getItem() + " " + e.getStateChange());
+            }
+        });
+
         Tim tim = (Tim) comboNazivTima.getSelectedItem();
         txtFieldLokacija.setText(tim.getLokacije().toString());
         txtFieldMenadzer.setText(tim.getMenadzer());
@@ -337,31 +371,19 @@ public class IzmenaTimova extends javax.swing.JDialog {
                 jcbDota2.setEnabled(false);
             }
         }
-        
+
         txtFieldLokacija.setEnabled(false);
         txtFieldMenadzer.setEnabled(false);
         txtFieldRegion.setEnabled(false);
         txtFieldSponzor.setEnabled(false);
         txtFieldTrener.setEnabled(false);
         txtFieldZaradjenNovac.setEnabled(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
-        jcbCSGO.setEnabled(true);
-        jcbDota2.setEnabled(true);
-        txtFieldLokacija.setEnabled(true);
-        txtFieldMenadzer.setEnabled(true);
-        txtFieldRegion.setEnabled(true);
-        txtFieldSponzor.setEnabled(true);
-        txtFieldTrener.setEnabled(true);
-        txtFieldZaradjenNovac.setEnabled(true);
-    }//GEN-LAST:event_btnIzmeniActionPerformed
+    }//GEN-LAST:event_comboNazivTimaItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIzmeni;
     private javax.swing.JButton btnSacuvajTim;
     private javax.swing.JComboBox comboNazivTima;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -369,6 +391,7 @@ public class IzmenaTimova extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JCheckBox jcbCSGO;
@@ -383,6 +406,7 @@ public class IzmenaTimova extends javax.swing.JDialog {
     private javax.swing.JTextField txtFieldLokacija;
     private javax.swing.JTextField txtFieldMenadzer;
     private javax.swing.JTextField txtFieldRegion;
+    private javax.swing.JTextField txtFieldSignedUser;
     private javax.swing.JTextField txtFieldSponzor;
     private javax.swing.JTextField txtFieldTrener;
     private javax.swing.JTextField txtFieldZaradjenNovac;
@@ -402,6 +426,13 @@ public class IzmenaTimova extends javax.swing.JDialog {
             for (Tim tim : lista) {
                 comboNazivTima.addItem(tim);
             }
+        }
+    }
+
+    private void srediTextFieldSignedIn() {
+        if (txtFieldSignedUser.getText().isEmpty()) {
+            txtFieldSignedUser.setText(GUIKontroler.getInstance().postaviUlogovanogKorisnika());
+            txtFieldSignedUser.setEditable(false);
         }
     }
 }

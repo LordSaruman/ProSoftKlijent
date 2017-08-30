@@ -86,6 +86,7 @@ public class MasterForma extends javax.swing.JDialog {
         IzmenaTimova = new javax.swing.JMenuItem();
         BrisanjeTimova = new javax.swing.JMenuItem();
         PretragaTimova = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         AdministracijaTurnira = new javax.swing.JMenu();
         UnosTurnira = new javax.swing.JMenuItem();
         PretragaTurnira = new javax.swing.JMenuItem();
@@ -137,6 +138,9 @@ public class MasterForma extends javax.swing.JDialog {
             }
         });
         AdministracijaTimova.add(PretragaTimova);
+
+        jMenuItem2.setText("Team");
+        AdministracijaTimova.add(jMenuItem2);
 
         menuBar.add(AdministracijaTimova);
 
@@ -246,7 +250,6 @@ public class MasterForma extends javax.swing.JDialog {
         dialog.pack();
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
-
     }//GEN-LAST:event_PretragaTimovaActionPerformed
 
     private void UnosRezultataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnosRezultataActionPerformed
@@ -371,6 +374,7 @@ public class MasterForma extends javax.swing.JDialog {
     private javax.swing.JMenuItem UnosTimova;
     private javax.swing.JMenuItem UnosTurnira;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables

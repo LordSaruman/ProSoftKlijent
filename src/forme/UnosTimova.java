@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
 import kontroler.GUIKontroler;
 import operacije.Operacija;
+import table.model.TeamTable;
 import table.model.TimoviTableModel;
 import transfer.KlijentskiZahtev;
 import transfer.ServerskiOdgovor;
@@ -32,6 +33,7 @@ public class UnosTimova extends javax.swing.JDialog {
 
     private boolean flag;
     private int idTima;
+    private Tim tim;
     private static UnosTimova instance;
     private ArrayList<Region> listaR;
     private ArrayList<Lokacija> listaL;
@@ -85,7 +87,7 @@ public class UnosTimova extends javax.swing.JDialog {
         btnSacuvajTim = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txtFieldMenadzer = new javax.swing.JTextField();
-        comboRegion = new javax.swing.JComboBox<>();
+        comboRegion = new javax.swing.JComboBox<Region>();
         comboLokacija = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jcbCSGO = new javax.swing.JCheckBox();
@@ -99,7 +101,8 @@ public class UnosTimova extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         txtFieldSignedUser = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaUnosTimova = new javax.swing.JTable();
+        btnUnosDostignuca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] Insert a Team");
@@ -311,7 +314,7 @@ public class UnosTimova extends javax.swing.JDialog {
 
         jLabel7.setText("Signed in user:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaUnosTimova.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -322,7 +325,14 @@ public class UnosTimova extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelaUnosTimova);
+
+        btnUnosDostignuca.setText("Insert a Team Accomplishments");
+        btnUnosDostignuca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUnosDostignucaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -334,7 +344,11 @@ public class UnosTimova extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnUnosDostignuca))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
@@ -355,7 +369,9 @@ public class UnosTimova extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUnosDostignuca)))
                 .addContainerGap())
         );
 
@@ -442,8 +458,17 @@ public class UnosTimova extends javax.swing.JDialog {
 //        popuniListuLokacija(r);
     }//GEN-LAST:event_comboRegionActionPerformed
 
+    private void btnUnosDostignucaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnosDostignucaActionPerformed
+        UnosDostignuca ud = new UnosDostignuca(null, true);
+        ud.proslediTim(tim);
+        ud.pack();
+        ud.setLocationRelativeTo(null);
+        ud.setVisible(true);
+    }//GEN-LAST:event_btnUnosDostignucaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSacuvajTim;
+    private javax.swing.JButton btnUnosDostignuca;
     private javax.swing.JComboBox comboLokacija;
     private javax.swing.JComboBox<Region> comboRegion;
     private javax.swing.JLabel jLabel1;
@@ -457,7 +482,6 @@ public class UnosTimova extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JCheckBox jcbCSGO;
     private javax.swing.JCheckBox jcbDota2;
     private javax.swing.JLabel jlbMenadzerPoruka;
@@ -466,6 +490,7 @@ public class UnosTimova extends javax.swing.JDialog {
     private javax.swing.JLabel jlblSponzorPoruka;
     private javax.swing.JLabel jlblTrenerPoruka;
     private javax.swing.JLabel jlblZaradjenNovacPoruka;
+    private javax.swing.JTable tabelaUnosTimova;
     private javax.swing.JTextField txtFieldMenadzer;
     private javax.swing.JTextField txtFieldNazivTima;
     private javax.swing.JTextField txtFieldSignedUser;
@@ -618,8 +643,8 @@ public class UnosTimova extends javax.swing.JDialog {
             for (OpstiDomenskiObjekat opstiDomenskiObjekat : list) {
                 spisakTimova.add((Tim) opstiDomenskiObjekat);
             }
-            TimoviTableModel tableModel = new TimoviTableModel(spisakTimova);
-            jTable1.setModel(tableModel);
+            TeamTable tableModel = new TeamTable(spisakTimova);
+            tabelaUnosTimova.setModel(tableModel);
         } catch (Exception ex) {
             Logger.getLogger(UnosTimova.class.getName()).log(Level.SEVERE, null, ex);
         }
