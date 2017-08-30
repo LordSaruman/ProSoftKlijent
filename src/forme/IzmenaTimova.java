@@ -5,18 +5,31 @@
  */
 package forme;
 
+import domen.Tim;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import komunikacija.Komunikacija;
+import kontroler.GUIKontroler;
+import operacije.Operacija;
+import transfer.KlijentskiZahtev;
+import transfer.ServerskiOdgovor;
+import transfer.StatusZahteva;
+
 /**
  *
- * @author ifpr85
+ * @author filip_000
  */
 public class IzmenaTimova extends javax.swing.JDialog {
 
     /**
      * Creates new form IzmenaTimova
      */
-    public IzmenaTimova(java.awt.Frame parent, boolean modal) {
+    public IzmenaTimova(java.awt.Frame parent, boolean modal) throws Exception {
         super(parent, modal);
         initComponents();
+        popuniComboNazivTimova();
     }
 
     /**
@@ -27,6 +40,35 @@ public class IzmenaTimova extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtFieldTrener = new javax.swing.JTextField();
+        txtFieldSponzor = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtFieldZaradjenNovac = new javax.swing.JTextField();
+        btnSacuvajTim = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        txtFieldMenadzer = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jcbCSGO = new javax.swing.JCheckBox();
+        jcbDota2 = new javax.swing.JCheckBox();
+        jlblTrenerPoruka = new javax.swing.JLabel();
+        jlbMenadzerPoruka = new javax.swing.JLabel();
+        jlblSponzorPoruka = new javax.swing.JLabel();
+        jlblZaradjenNovacPoruka = new javax.swing.JLabel();
+        jlblIgreKojeTimIgraPoruka = new javax.swing.JLabel();
+        txtFieldRegion = new javax.swing.JTextField();
+        txtFieldLokacija = new javax.swing.JTextField();
+        comboNazivTima = new javax.swing.JComboBox();
+        btnIzmeni = new javax.swing.JButton();
+        lblRegionPoruka = new javax.swing.JLabel();
+        lblLokacijaPoruka = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] Change a Team");
@@ -229,58 +271,137 @@ public class IzmenaTimova extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IzmenaTimova.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IzmenaTimova.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IzmenaTimova.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IzmenaTimova.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnSacuvajTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajTimActionPerformed
+//        String naziv = txtFieldNazivTima.getText().trim();
+//        String trener = txtFieldTrener.getText().trim();
+//        String menadzer = txtFieldMenadzer.getText().trim();
+//        String sponzor = txtFieldSponzor.getText().trim();
+//        Region region = (Region) comboRegion.getSelectedItem();
+//        Lokacija lokacija = (Lokacija) comboLokacija.getSelectedItem();
+//        String novac = txtFieldZaradjenNovac.getText().trim();
+//        Tim tim;
+//
+//        String igre = "";
+//        if (jcbCSGO.isSelected()) {
+//            igre += "CSGO" + "";
+//            if (jcbDota2.isSelected()) {
+//                igre += "Dota2";
+//            }
+//        }
+//
+//        try {
+//            tim = kreirajIIzvrsiValidaciju(naziv, trener, menadzer, sponzor, region, lokacija, igre, novac);
+//            Kontrolor.getInstance().sacuvajTim(tim);
+//            JOptionPane.showMessageDialog(this, "Tim je uspesno sacuvan", "Success", JOptionPane.INFORMATION_MESSAGE);
+//        } catch (Exception ex) {
+//            Logger.getLogger(UnosTimova.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                IzmenaTimova dialog = new IzmenaTimova(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+    }//GEN-LAST:event_btnSacuvajTimActionPerformed
+
+    private void jcbDota2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbDota2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbDota2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Tim tim = (Tim) comboNazivTima.getSelectedItem();
+        txtFieldLokacija.setText(tim.getLokacije().toString());
+        txtFieldMenadzer.setText(tim.getMenadzer());
+        txtFieldRegion.setText(tim.getRegion().toString());
+        txtFieldSponzor.setText(tim.getSponzor());
+        txtFieldTrener.setText(tim.getTrener());
+        txtFieldZaradjenNovac.setText(tim.getZaradjenNovac().toString());
+
+        String igre = tim.getIgre();
+        if (igre.contains("CSGO")) {
+            jcbCSGO.isSelected();
+            jcbCSGO.setEnabled(false);
+            if (igre.contains("Dota2")) {
+                jcbDota2.isSelected();
+                jcbDota2.setEnabled(false);
             }
-        });
-    }
+        }
+        
+        txtFieldLokacija.setEnabled(false);
+        txtFieldMenadzer.setEnabled(false);
+        txtFieldRegion.setEnabled(false);
+        txtFieldSponzor.setEnabled(false);
+        txtFieldTrener.setEnabled(false);
+        txtFieldZaradjenNovac.setEnabled(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
+        jcbCSGO.setEnabled(true);
+        jcbDota2.setEnabled(true);
+        txtFieldLokacija.setEnabled(true);
+        txtFieldMenadzer.setEnabled(true);
+        txtFieldRegion.setEnabled(true);
+        txtFieldSponzor.setEnabled(true);
+        txtFieldTrener.setEnabled(true);
+        txtFieldZaradjenNovac.setEnabled(true);
+    }//GEN-LAST:event_btnIzmeniActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIzmeni;
+    private javax.swing.JButton btnSacuvajTim;
+    private javax.swing.JComboBox comboNazivTima;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JCheckBox jcbCSGO;
+    private javax.swing.JCheckBox jcbDota2;
+    private javax.swing.JLabel jlbMenadzerPoruka;
+    private javax.swing.JLabel jlblIgreKojeTimIgraPoruka;
+    private javax.swing.JLabel jlblSponzorPoruka;
+    private javax.swing.JLabel jlblTrenerPoruka;
+    private javax.swing.JLabel jlblZaradjenNovacPoruka;
+    private javax.swing.JLabel lblLokacijaPoruka;
+    private javax.swing.JLabel lblRegionPoruka;
+    private javax.swing.JTextField txtFieldLokacija;
+    private javax.swing.JTextField txtFieldMenadzer;
+    private javax.swing.JTextField txtFieldRegion;
+    private javax.swing.JTextField txtFieldSponzor;
+    private javax.swing.JTextField txtFieldTrener;
+    private javax.swing.JTextField txtFieldZaradjenNovac;
     // End of variables declaration//GEN-END:variables
+
+    private void popuniComboNazivTimova() throws Exception {
+        comboNazivTima.removeAllItems();
+        ArrayList<Tim> lista = new ArrayList<>();
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacija.VRATI_LISTU);
+        kz.setParametar(new Tim());
+        Komunikacija.getInstance().posaljiZahtev(kz);
+
+        ServerskiOdgovor so = Komunikacija.getInstance().primiOdgovor();
+        if (so.getStatusZahteva() == StatusZahteva.USPESAN_ZAHTEV) {
+            lista = (ArrayList<Tim>) so.getOdgovor();
+            for (Tim tim : lista) {
+                comboNazivTima.addItem(tim);
+            }
+        }
+    }
 }

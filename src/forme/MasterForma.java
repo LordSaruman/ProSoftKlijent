@@ -5,6 +5,7 @@
  */
 package forme;
 
+import domen.Korisnik;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -27,6 +28,7 @@ import kontroler.GUIKontroler;
 public class MasterForma extends javax.swing.JDialog {
 
     private static MasterForma instance;
+    private Korisnik korisnik;
 
     public static MasterForma getInstance() {
         if (instance == null) {
@@ -287,9 +289,10 @@ public class MasterForma extends javax.swing.JDialog {
     private void LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutActionPerformed
         int reply = JOptionPane.showConfirmDialog(this, "Do you really want to Log out?", "Info", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
+            korisnik = GUIKontroler.getInstance().getTrenutnoUlogovani();
             JOptionPane.showMessageDialog(this, "Goodbye.", "Info", JOptionPane.INFORMATION_MESSAGE);
             GUIKontroler.getInstance().ugasiPocetnuFormu();
-            GUIKontroler.getInstance().izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika();
+            GUIKontroler.getInstance().izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika(korisnik);
             GUIKontroler.getInstance().vratiFormu();
         } else {
             System.exit(0);
@@ -300,7 +303,7 @@ public class MasterForma extends javax.swing.JDialog {
         int reply = JOptionPane.showConfirmDialog(this, "Do you really want to Log out?", "Info", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, "Goodbye.", "Info", JOptionPane.INFORMATION_MESSAGE);
-            GUIKontroler.getInstance().izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika();
+            GUIKontroler.getInstance().izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika(null);
             GUIKontroler.getInstance().ugasiLoginFormu();
             GUIKontroler.getInstance().ugasiMasterFormu();
             GUIKontroler.getInstance().vratiFormu();
@@ -368,7 +371,6 @@ public class MasterForma extends javax.swing.JDialog {
     private javax.swing.JMenuItem UnosTimova;
     private javax.swing.JMenuItem UnosTurnira;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables

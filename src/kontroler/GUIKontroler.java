@@ -35,6 +35,7 @@ public class GUIKontroler {
     private ArrayList<OpstiDomenskiObjekat> listaUlogovanihKorisnika;
     private String imeIPrezime = "";
     private Korisnik korisnik;
+    private Korisnik trenutnoUlogovani;
 
     private GUIKontroler() {
         listaUlogovanihKorisnika = new ArrayList<>();
@@ -70,15 +71,6 @@ public class GUIKontroler {
     public void ugasiMasterFormu() {
         masterForma.setVisible(false);
     }
-    
-    public void ugasiLoginFormu(){
-        loginForma.setVisible(false);
-    }
-    
-    public void ugasiMasterFormu(){
-        masterForma.setVisible(false);
-    }
-    
 
     public ArrayList<OpstiDomenskiObjekat> vratiListuKorisnika() throws Exception {
         if (listaKorisnika == null) {
@@ -97,7 +89,7 @@ public class GUIKontroler {
             if (korisnik.getUsername().equals(usernameName) && korisnik.getPassword().equals(password)) {
                 if (imeIPrezime.isEmpty()) {
                     imeIPrezime += korisnik.getImeKorisnika() + " " + korisnik.getPrezimeKorisnika();
-
+                    trenutnoUlogovani = korisnik;
                 }
                 if (!listaUlogovanihKorisnika.contains(korisnik)) {
                     listaUlogovanihKorisnika.add(korisnik);
@@ -182,5 +174,9 @@ public class GUIKontroler {
 
     public void izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika(Korisnik korisnik) {
         listaUlogovanihKorisnika.remove(korisnik);
+    }
+
+    public Korisnik getTrenutnoUlogovani() {
+        return trenutnoUlogovani;
     }
 }
