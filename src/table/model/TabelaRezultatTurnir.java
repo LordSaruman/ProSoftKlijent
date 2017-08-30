@@ -6,6 +6,7 @@
 package table.model;
 
 import domen.OpstiDomenskiObjekat;
+import domen.Turnir;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -15,22 +16,48 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TabelaRezultatTurnir extends AbstractTableModel{
 
-    String kolone[] = new String[]{"Team", "Coach", "Manager", "Sponsor", "Games", "Earned Money", "Region", "Location"};;
-    ArrayList<OpstiDomenskiObjekat> spisakTimova;
+    String kolone[] = new String[]{"Tournament", "Start", "End", "Prize Pool", "Series", "Location", "Region"};;
+    ArrayList<OpstiDomenskiObjekat> spisakTurnira;
+
+    public TabelaRezultatTurnir(ArrayList<OpstiDomenskiObjekat> spisakTimova) {
+        this.spisakTurnira = spisakTimova;
+    }
     
     @Override
     public int getRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return spisakTurnira.size();
     }
 
     @Override
     public int getColumnCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return kolone.length;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Turnir turnir = (Turnir) spisakTurnira.get(rowIndex);
+        switch(columnIndex){
+            case 0: 
+                return turnir.getNaziv();
+            case 1:
+                return turnir.getPocetak();
+            case 2: 
+                return turnir.getKraj();
+            case 3: 
+                return turnir.getNagradniFond();
+            case 4: 
+                return turnir.getSerija().getNazivSerije();
+            case 5: 
+                return turnir.getLokacija().getNazivLokacije();
+            case 6:
+                return turnir.getRegion().getNazivRegiona();
+                
+            default: return "N/A";
+        }
     }
-    
+
+    @Override
+    public String getColumnName(int column) {
+        return kolone[column];
+    }
 }

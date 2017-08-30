@@ -18,6 +18,7 @@ import javax.swing.JTable;
 import kontroler.GUIKontroler;
 import table.model.RezultatiTabelModel;
 import table.model.TabelaRezultatTim;
+import table.model.TabelaRezultatTurnir;
 
 /**
  *
@@ -448,7 +449,8 @@ public class UnosRezultata extends javax.swing.JDialog {
         }
         
         try {
-            
+            TabelaRezultatTurnir trr = new TabelaRezultatTurnir(GUIKontroler.getInstance().vratiListu(new Turnir()));
+            tabelaRezultat.setModel(trr);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

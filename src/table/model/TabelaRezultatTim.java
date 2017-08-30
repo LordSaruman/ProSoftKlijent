@@ -49,9 +49,9 @@ public class TabelaRezultatTim extends AbstractTableModel{
             case 4: 
                 return tim.getZaradjenNovac();
             case 5: 
-                return tim.getRegion();
+                return tim.getRegion().getNazivRegiona();
             case 6:
-                return tim.getLokacije();
+                return tim.getLokacije().getNazivLokacije();
                 
             default: return "N/A";
         }
