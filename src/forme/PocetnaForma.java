@@ -157,7 +157,6 @@ public class PocetnaForma extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogInActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        JFrame jf = new PocetnaForma();
         PocetnaForma.this.setVisible(false);
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
