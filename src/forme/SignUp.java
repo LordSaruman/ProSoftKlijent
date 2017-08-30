@@ -238,9 +238,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
             String password = txtPassword.getText().trim();
 
             Korisnik korisnik;
-
             try {
-
                 if (kreirajIIzvrsiValidaciju(name, surname, username, password) == true) {
                     korisnik = vratiKorisnika(name, surname, username, password);
 
@@ -249,7 +247,6 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                     kz.setParametar(korisnik);
                     Komunikacija.getInstance().posaljiZahtev(kz);
                     srediTextField();
-
                     ServerskiOdgovor so = Komunikacija.getInstance().primiOdgovor();
                     if (so.getStatusZahteva() == StatusZahteva.USPESAN_ZAHTEV) {
                         JOptionPane.showMessageDialog(this, "Successful sign up!", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -261,7 +258,6 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                         validate();
                         return;
                     }
-
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Unsuccessful sign up.", "Error", JOptionPane.ERROR_MESSAGE);

@@ -45,10 +45,10 @@ public class Team extends javax.swing.JDialog {
         txtFieldSignedUser = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaTeam = new javax.swing.JTable();
-        btnUnosNovogTima = new javax.swing.JButton();
         btnBrisanjeTima = new javax.swing.JButton();
         btnIzmeniTim = new javax.swing.JButton();
         btnNaprednaPretraga = new javax.swing.JButton();
+        btnUnosNovogTima = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -66,13 +66,6 @@ public class Team extends javax.swing.JDialog {
             }
         ));
         jScrollPane1.setViewportView(tabelaTeam);
-
-        btnUnosNovogTima.setText("Insert a new Team");
-        btnUnosNovogTima.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUnosNovogTimaActionPerformed(evt);
-            }
-        });
 
         btnBrisanjeTima.setText("Delete a selected Team");
         btnBrisanjeTima.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +88,13 @@ public class Team extends javax.swing.JDialog {
             }
         });
 
+        btnUnosNovogTima.setText("Insert a new Team");
+        btnUnosNovogTima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUnosNovogTimaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,15 +102,15 @@ public class Team extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1185, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(txtFieldSignedUser, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 595, Short.MAX_VALUE)
-                        .addComponent(btnUnosNovogTima)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUnosNovogTima, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBrisanjeTima)
                         .addGap(18, 18, 18)
