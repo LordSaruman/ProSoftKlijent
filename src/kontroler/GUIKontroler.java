@@ -37,6 +37,7 @@ public class GUIKontroler {
     private Korisnik korisnik;
 
     private GUIKontroler() {
+        listaUlogovanihKorisnika = new ArrayList<>();
     }
 
     public static GUIKontroler getInstance() {
@@ -69,6 +70,15 @@ public class GUIKontroler {
     public void ugasiMasterFormu() {
         masterForma.setVisible(false);
     }
+    
+    public void ugasiLoginFormu(){
+        loginForma.setVisible(false);
+    }
+    
+    public void ugasiMasterFormu(){
+        masterForma.setVisible(false);
+    }
+    
 
     public ArrayList<OpstiDomenskiObjekat> vratiListuKorisnika() throws Exception {
         if (listaKorisnika == null) {
@@ -83,10 +93,11 @@ public class GUIKontroler {
         String password = VerifikatorLogInPassword.getInstance().password;
 
         for (OpstiDomenskiObjekat odoKorisnik : listaKorisnika) {
-            Korisnik korisnik = (Korisnik) odoKorisnik;
+            korisnik = (Korisnik) odoKorisnik;
             if (korisnik.getUsername().equals(usernameName) && korisnik.getPassword().equals(password)) {
                 if (imeIPrezime.isEmpty()) {
                     imeIPrezime += korisnik.getImeKorisnika() + " " + korisnik.getPrezimeKorisnika();
+
                 }
                 if (!listaUlogovanihKorisnika.contains(korisnik)) {
                     listaUlogovanihKorisnika.add(korisnik);
