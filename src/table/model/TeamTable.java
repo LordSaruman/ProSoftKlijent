@@ -13,15 +13,14 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author filip_000
  */
-public class TeamTable extends AbstractTableModel{
-    
+public class TeamTable extends AbstractTableModel {
+
     String kolone[] = new String[]{"Team", "Coach", "Manager", "Sponsor", "Games", "Earned Money", "Region", "Location"};
     ArrayList<Tim> spisakTimova;
 
     public TeamTable(ArrayList<Tim> spisakTimova) {
         this.spisakTimova = spisakTimova == null ? new ArrayList<>() : spisakTimova;
     }
-
 
     @Override
     public int getRowCount() {
@@ -36,23 +35,24 @@ public class TeamTable extends AbstractTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Tim tim = (Tim) spisakTimova.get(rowIndex);
-        switch(columnIndex){
-            case 0: 
+        switch (columnIndex) {
+            case 0:
                 return tim.getNaziv();
             case 1:
                 return tim.getTrener();
-            case 2: 
+            case 2:
                 return tim.getMenadzer();
-            case 3: 
+            case 3:
                 return tim.getIgre();
-            case 4: 
+            case 4:
                 return tim.getZaradjenNovac();
-            case 5: 
+            case 5:
                 return tim.getRegion();
             case 6:
                 return tim.getLokacije();
-                
-            default: return "N/A";
+
+            default:
+                return "N/A";
         }
     }
 
@@ -64,6 +64,9 @@ public class TeamTable extends AbstractTableModel{
     public Tim vratiSelektovanTim(int row) {
         return spisakTimova.get(row);
     }
-    
-    
+
+    public void izbaciTim(Tim tim) {
+        spisakTimova.remove(tim);
+        fireTableDataChanged();
+    }
 }

@@ -141,6 +141,11 @@ public class MasterForma extends javax.swing.JDialog {
         AdministracijaTimova.add(PretragaTimova);
 
         jMenuItem2.setText("Team");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         AdministracijaTimova.add(jMenuItem2);
 
         menuBar.add(AdministracijaTimova);
@@ -325,6 +330,13 @@ public class MasterForma extends javax.swing.JDialog {
     private void tournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tournamentActionPerformed
         
     }//GEN-LAST:event_tournamentActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Team t = new Team(null, true);
+        t.pack();
+        t.setLocationRelativeTo(null);
+        t.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -36,6 +36,7 @@ public class IzmenaTimova extends javax.swing.JDialog {
     private int idTima;
     private Tim tim;
     Double gold = 0.0;
+
     /**
      * Creates new form IzmenaTimova
      */
@@ -366,7 +367,7 @@ public class IzmenaTimova extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSacuvajTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajTimActionPerformed
-        
+
         String naziv = (String) comboNazivTima.getSelectedItem();
         String trener = txtFieldTrener.getText().trim();
         String menadzer = txtFieldMenadzer.getText().trim();
@@ -390,12 +391,12 @@ public class IzmenaTimova extends javax.swing.JDialog {
                     jlblNewTeam.setText("Field for new name is empty");
                     jlblNewTeam.setForeground(Color.red);
                     flag = false;
-                }else{
+                } else {
                     jlblNewTeam.setText("");
                     naziv = txtNewName.getText();
                 }
             }
-            
+
             if (kreirajIIzvrsiValidaciju(naziv, trener, menadzer, sponzor, region, lokacija, igre, novac) == true) {
                 tim = vratiTim(naziv, trener, menadzer, sponzor, region, lokacija, igre, novac);
                 KlijentskiZahtev kz = new KlijentskiZahtev();
@@ -521,13 +522,16 @@ public class IzmenaTimova extends javax.swing.JDialog {
     private javax.swing.JTextField txtNewName;
     // End of variables declaration//GEN-END:variables
 
-     private ArrayList<Region> vratiListuR() throws Exception {
+    private ArrayList<Region> vratiListuR() throws Exception {
         List<OpstiDomenskiObjekat> list = GUIKontroler.getInstance().vratiListu(new Region());
         ArrayList<Region> lista = new ArrayList<>();
         for (OpstiDomenskiObjekat opstiDomenskiObjekat : list) {
             lista.add((Region) opstiDomenskiObjekat);
         }
-
+        comboRegion.removeAllItems();
+        for (Region region : lista) {
+            comboRegion.addItem(region);
+        }
         return lista;
     }
 
@@ -537,9 +541,13 @@ public class IzmenaTimova extends javax.swing.JDialog {
         for (OpstiDomenskiObjekat opstiDomenskiObjekat : list) {
             lista.add((Lokacija) opstiDomenskiObjekat);
         }
+        comboLokacija.removeAllItems();
+        for (Lokacija lokacija : lista) {
+            comboLokacija.addItem(lokacija);
+        }
         return lista;
     }
-    
+
     private void popuniComboNazivTimova() throws Exception {
         comboNazivTima.removeAllItems();
         ArrayList<Tim> lista = new ArrayList<>();

@@ -234,7 +234,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                         JOptionPane.showMessageDialog(this, "Successful sign up!", "Success", JOptionPane.INFORMATION_MESSAGE);
                         setVisible(false);
                     } else {
-                        JOptionPane.showMessageDialog(this, "Unsuccessful sign up.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Unsuccessful sign up.1", "Error", JOptionPane.ERROR_MESSAGE);
                         invalidate();
                         repaint();
                         validate();
@@ -242,7 +242,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                     }
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Unsuccessful sign up.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Unsuccessful sign up.2", "Error", JOptionPane.ERROR_MESSAGE);
                 invalidate();
                 repaint();
                 validate();

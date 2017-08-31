@@ -7,6 +7,11 @@ package forme;
 
 import domen.Tim;
 import javax.swing.JOptionPane;
+import komunikacija.Komunikacija;
+import operacije.Operacija;
+import table.model.TeamTable;
+import transfer.KlijentskiZahtev;
+import transfer.ServerskiOdgovor;
 
 /**
  *
@@ -15,6 +20,7 @@ import javax.swing.JOptionPane;
 public class BrisanjeTima extends javax.swing.JDialog {
 
     Tim tim = null;
+    TeamTable tt = null;
     /**
      * Creates new form BrisanjeTima
      */
@@ -93,7 +99,19 @@ public class BrisanjeTima extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajActionPerformed
-        //cofi
+        KlijentskiZahtev kz = new KlijentskiZahtev();
+        kz.setOperacija(Operacija.OBRISI);
+        kz.setParametar(tim);
+        
+        Komunikacija.getInstance().posaljiZahtev(kz);
+        ServerskiOdgovor so = Komunikacija.getInstance().primiOdgovor();
+        
+        boolean flag = (boolean) so.getOdgovor();
+        if (flag) {
+            tt.izbaciTim(tim);
+            JOptionPane.showMessageDialog(this, "Team has been deleted from Database.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
         JOptionPane.showMessageDialog(this, "Team has been deleted from Database.", "Info", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnSacuvajActionPerformed
 
@@ -147,5 +165,9 @@ public class BrisanjeTima extends javax.swing.JDialog {
 
     void proslediTim(Tim tim) {
         this.tim = tim;
+    }
+
+    void proslediModel(TeamTable tt) {
+        this.tt = tt;
     }
 }

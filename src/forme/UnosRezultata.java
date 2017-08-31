@@ -65,7 +65,6 @@ public class UnosRezultata extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaRezultat = new javax.swing.JTable();
-        btnIzmenaRezultata = new javax.swing.JButton();
         btnSacuvajIzmenjen = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtSignedUser = new javax.swing.JTextField();
@@ -159,14 +158,6 @@ public class UnosRezultata extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tabelaRezultat);
 
-        btnIzmenaRezultata.setText("Change a result");
-        btnIzmenaRezultata.setEnabled(false);
-        btnIzmenaRezultata.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIzmenaRezultataActionPerformed(evt);
-            }
-        });
-
         btnSacuvajIzmenjen.setText("Save a changed result");
         btnSacuvajIzmenjen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,25 +169,22 @@ public class UnosRezultata extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnIzmenaRezultata)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSacuvajIzmenjen))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                .addComponent(btnSacuvajIzmenjen)
+                .addGap(0, 0, 0))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIzmenaRezultata)
-                    .addComponent(btnSacuvajIzmenjen))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(btnSacuvajIzmenjen)
                 .addContainerGap())
         );
 
@@ -272,7 +260,7 @@ public class UnosRezultata extends javax.swing.JDialog {
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(0, 0, 0)));
+        jSeparator1.setPreferredSize(new java.awt.Dimension(0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -294,7 +282,7 @@ public class UnosRezultata extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(panelTimovi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,7 +322,7 @@ public class UnosRezultata extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(141, 141, 141))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -359,10 +347,6 @@ public class UnosRezultata extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnSacuvajRezultatActionPerformed
 
-    private void btnIzmenaRezultataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmenaRezultataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnIzmenaRezultataActionPerformed
-
     private void btnSacuvajIzmenjenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajIzmenjenActionPerformed
         RezultatiTabelModel rezultatiTabelModel = (RezultatiTabelModel) tabelaRezultat.getModel();
         try {
@@ -373,7 +357,6 @@ public class UnosRezultata extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSacuvajIzmenjenActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnIzmenaRezultata;
     private javax.swing.JButton btnSacuvajIzmenjen;
     private javax.swing.JButton btnSacuvajRezultat;
     private javax.swing.JComboBox comboTeam;

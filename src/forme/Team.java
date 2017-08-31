@@ -190,17 +190,24 @@ public class Team extends javax.swing.JDialog {
 
     private void btnBrisanjeTimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrisanjeTimaActionPerformed
         int row = tabelaTeam.getSelectedRow();
-        int reply = JOptionPane.showConfirmDialog(this, "Do you really want to delete selected Team?", "Info", JOptionPane.YES_NO_OPTION);
         if (row != -1) {
+            int reply = JOptionPane.showConfirmDialog(this, "Do you really want to delete selected Team?", "Info", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 TeamTable tt = (TeamTable) tabelaTeam.getModel();
                 Tim tim = tt.vratiSelektovanTim(row);
 
                 BrisanjeTima bt = new BrisanjeTima(null, true);
                 bt.proslediTim(tim);
+                bt.proslediModel(tt);
+                bt.pack();
+                bt.setLocationRelativeTo(null);
+                bt.setVisible(true);
             } else {
-                System.exit(0);
+                dispose();
             }
+        }else{
+            JOptionPane.showMessageDialog(this, "You have not selected a Team.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_btnBrisanjeTimaActionPerformed
 
