@@ -73,10 +73,13 @@
                 <Property name="text" type="java.lang.String" value="Changing a Tournament"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+            <MenuItem class="javax.swing.JMenuItem" name="tournament">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tournamet"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tournamentActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

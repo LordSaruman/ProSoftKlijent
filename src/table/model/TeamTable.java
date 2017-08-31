@@ -5,14 +5,13 @@
  */
 package table.model;
 
-import domen.OpstiDomenskiObjekat;
 import domen.Tim;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author ifpr85
+ * @author filip_000
  */
 public class TeamTable extends AbstractTableModel{
     

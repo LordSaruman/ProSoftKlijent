@@ -92,7 +92,7 @@ public class MasterForma extends javax.swing.JDialog {
         PretragaTurnira = new javax.swing.JMenuItem();
         BrisanjeTurnira = new javax.swing.JMenuItem();
         IzmenaTurnira = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        tournament = new javax.swing.JMenuItem();
         UnosRezultata = new javax.swing.JMenu();
         Unos = new javax.swing.JMenuItem();
         OAplikaciji = new javax.swing.JMenu();
@@ -159,8 +159,13 @@ public class MasterForma extends javax.swing.JDialog {
         IzmenaTurnira.setText("Changing a Tournament");
         AdministracijaTurnira.add(IzmenaTurnira);
 
-        jMenuItem4.setText("Tournamet");
-        AdministracijaTurnira.add(jMenuItem4);
+        tournament.setText("Tournamet");
+        tournament.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tournamentActionPerformed(evt);
+            }
+        });
+        AdministracijaTurnira.add(tournament);
 
         menuBar.add(AdministracijaTurnira);
 
@@ -317,6 +322,10 @@ public class MasterForma extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_LogOutMouseClicked
 
+    private void tournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tournamentActionPerformed
+        
+    }//GEN-LAST:event_tournamentActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -380,8 +389,8 @@ public class MasterForma extends javax.swing.JDialog {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem tournament;
     // End of variables declaration//GEN-END:variables
 
     public void srediPanelSlike() {
