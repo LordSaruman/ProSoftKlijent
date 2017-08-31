@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Nikola
+ * @author filip_000
  */
 public class NaprednaPretraga extends javax.swing.JDialog {
 
@@ -117,7 +117,7 @@ public class NaprednaPretraga extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOdustaniActionPerformed
-        int rez = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da zelite da odustanate", "Info", JOptionPane.YES_NO_OPTION);
+        int rez = JOptionPane.showConfirmDialog(this, "Are You sure that you want to quit?", "Info", JOptionPane.YES_NO_OPTION);
         if (rez == JOptionPane.YES_OPTION) {
             setVisible(false);
         }
@@ -132,7 +132,7 @@ public class NaprednaPretraga extends javax.swing.JDialog {
         }
 
         if (filter.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Molim izaberite manadzere po kojima zelite da filtirate");
+            JOptionPane.showMessageDialog(this, "Please, select the criteria via which you want to filter.", "Info", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
 
@@ -141,7 +141,7 @@ public class NaprednaPretraga extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPrimeniPretraguActionPerformed
 
     private void btnObrisiFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiFilterActionPerformed
-        cale.obrisiManadzerFilter();
+        cale.obrisiFilter();
         setVisible(false);
     }//GEN-LAST:event_btnObrisiFilterActionPerformed
 
@@ -173,7 +173,6 @@ public class NaprednaPretraga extends javax.swing.JDialog {
                         .addGroup(sg)
         );
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnObrisiFilter;
     private javax.swing.JButton btnOdustani;

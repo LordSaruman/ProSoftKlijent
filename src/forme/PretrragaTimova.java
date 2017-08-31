@@ -13,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import kontroler.GUIKontroler;
 import table.model.TimoviTableModel;
 
@@ -59,6 +58,8 @@ public class PretrragaTimova extends javax.swing.JDialog {
         jSeparator3 = new javax.swing.JSeparator();
         btnSponzor = new javax.swing.JButton();
         btnIgre = new javax.swing.JButton();
+        btnObrisiFilter = new javax.swing.JButton();
+        btnOtkazi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] Advanced Search");
@@ -119,8 +120,18 @@ public class PretrragaTimova extends javax.swing.JDialog {
         jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         btnSponzor.setText("Choose the Sponsors");
+        btnSponzor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSponzorActionPerformed(evt);
+            }
+        });
 
         btnIgre.setText("Choose the games");
+        btnIgre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIgreActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -146,11 +157,11 @@ public class PretrragaTimova extends javax.swing.JDialog {
                     .addComponent(jLabel5)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnManager)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSponzor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnIgre)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,23 +172,37 @@ public class PretrragaTimova extends javax.swing.JDialog {
                     .addComponent(jLabel2))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtZarNovacOd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtZarNovDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
-                        .addComponent(btnPretrazi))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addComponent(btnPretrazi)
+                        .addContainerGap(19, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnManager)
                             .addComponent(btnSponzor)
-                            .addComponent(btnIgre))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                            .addComponent(btnIgre))
+                        .addGap(19, 19, 19))))
             .addComponent(jSeparator3)
         );
+
+        btnObrisiFilter.setText("Delete Filter");
+        btnObrisiFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObrisiFilterActionPerformed(evt);
+            }
+        });
+
+        btnOtkazi.setText("Close");
+        btnOtkazi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOtkaziActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,7 +218,12 @@ public class PretrragaTimova extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtSearchInput))
                     .addComponent(jSeparator2)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnObrisiFilter)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnOtkazi)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -210,7 +240,11 @@ public class PretrragaTimova extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnObrisiFilter)
+                    .addComponent(btnOtkazi))
                 .addContainerGap())
         );
 
@@ -259,10 +293,53 @@ public class PretrragaTimova extends javax.swing.JDialog {
         tableModel.filtirajTabelaPoZaradi(moneyFrom, moneyTo);
     }//GEN-LAST:event_btnPretraziActionPerformed
 
+    private void btnSponzorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSponzorActionPerformed
+        List<String> sponzori;
 
+        try {
+            sponzori = kontroler.GUIKontroler.getInstance().vratiListuSponzora();
+        } catch (Exception e) {
+            Logger.getLogger(PretrragaTimova.class.getName()).log(Level.SEVERE, null, e);
+            return;
+        }
+
+        JDialog jd = new NaprednaPretraga(null, true, sponzori, this);
+        jd.setLocationRelativeTo(null);
+
+        jd.setVisible(true);
+    }//GEN-LAST:event_btnSponzorActionPerformed
+
+    private void btnIgreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIgreActionPerformed
+        List<String> igre;
+
+        try {
+            igre = kontroler.GUIKontroler.getInstance().vratiIgre();
+        } catch (Exception e) {
+            Logger.getLogger(PretrragaTimova.class.getName()).log(Level.SEVERE, null, e);
+            return;
+        }
+
+        JDialog jd = new NaprednaPretraga(null, true, igre, this);
+        jd.setLocationRelativeTo(null);
+
+        jd.setVisible(true);
+    }//GEN-LAST:event_btnIgreActionPerformed
+
+    private void btnOtkaziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtkaziActionPerformed
+        int rez = JOptionPane.showConfirmDialog(this, "Are You sure that you want to quit?", "Info", JOptionPane.YES_NO_OPTION);
+        if (rez == JOptionPane.YES_OPTION) {
+            setVisible(false);
+        }
+    }//GEN-LAST:event_btnOtkaziActionPerformed
+
+    private void btnObrisiFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiFilterActionPerformed
+        obrisiFilter();
+    }//GEN-LAST:event_btnObrisiFilterActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIgre;
     private javax.swing.JButton btnManager;
+    private javax.swing.JButton btnObrisiFilter;
+    private javax.swing.JButton btnOtkazi;
     private javax.swing.JButton btnPretrazi;
     private javax.swing.JButton btnSponzor;
     private javax.swing.JLabel jLabel1;
@@ -303,12 +380,12 @@ public class PretrragaTimova extends javax.swing.JDialog {
     }
 
     void filtrirajPoNecemu(List<String> filter) {
-
         TimoviTableModel tableModel = (TimoviTableModel) jTable1.getModel();
         tableModel.filtrirajPoNecemu(filter);
     }
 
-    void obrisiManadzerFilter() {
+
+    void obrisiFilter() {
         TimoviTableModel tableModel = (TimoviTableModel) jTable1.getModel();
         tableModel.filtrirajPoNecemu(new ArrayList<>());
     }

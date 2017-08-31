@@ -148,6 +148,32 @@ public class GUIKontroler {
         return spisakMenadzera;
     }
 
+    public List<String> vratiListuSponzora() throws Exception {
+        ArrayList<String> spisakSponzora = new ArrayList<>();
+        List<OpstiDomenskiObjekat> list = vratiListu(new Tim());
+        for (OpstiDomenskiObjekat odo : list) {
+            Tim tim = (Tim) odo;
+            if (!spisakSponzora.contains(tim.getSponzor())) {
+                spisakSponzora.add(tim.getSponzor());
+            }
+        }
+        return spisakSponzora;
+    }
+    
+    
+    public List<String> vratiIgre() throws Exception {
+        ArrayList<String> spisakIgara = new ArrayList<>();
+        List<OpstiDomenskiObjekat> list = vratiListu(new Tim());
+        for (OpstiDomenskiObjekat odo : list) {
+            Tim tim = (Tim) odo;
+            if (!spisakIgara.contains(tim.getSponzor())) {
+                spisakIgara.add(tim.getSponzor());
+            }
+        }
+        return spisakIgara;
+    }
+
+
     public void sacuvajListuRezultata(ArrayList<OpstiDomenskiObjekat> spisakRezultata) throws Exception {
         KlijentskiZahtev kz = new KlijentskiZahtev();
         kz.setOperacija(Operacija.SACUVAJ_REZULTATE);
@@ -179,4 +205,5 @@ public class GUIKontroler {
     public Korisnik getTrenutnoUlogovani() {
         return trenutnoUlogovani;
     }
+
 }
