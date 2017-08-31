@@ -31,9 +31,8 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
 
     private static SignUp instance;
     private int idKorisnika;
-    private String hideAndReveal = "HideAndReveal";
-    private JPasswordField passwordField;
     private String greska = "";
+    private static String LogIn = "Log in";
 
     public static SignUp getInstance() {
         if (instance == null) {
@@ -48,10 +47,9 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
     public SignUp(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        passwordField = new JPasswordField(10);
-        passwordField.setEchoChar('*');
-        passwordField.setActionCommand(hideAndReveal);
-        passwordField.addActionListener(this);
+        txtPasswordField.setEchoChar('*');
+        txtPasswordField.setActionCommand(LogIn);
+        txtPasswordField.addActionListener(this);
     }
 
     @SuppressWarnings("unchecked")
@@ -66,13 +64,13 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
         txtSurname = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnCreateAnAccount = new javax.swing.JButton();
         jlblPorukaName = new javax.swing.JLabel();
         jlblPorukaSurname = new javax.swing.JLabel();
         jlblPorukaUsername = new javax.swing.JLabel();
         jlblPorukaPassword = new javax.swing.JLabel();
+        txtPasswordField = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -91,18 +89,12 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
 
         jLabel5.setText("Username:");
 
-        txtPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasswordActionPerformed(evt);
-            }
-        });
-
         jLabel6.setText("Password:");
 
-        jButton1.setText("Create an account");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCreateAnAccount.setText("Create an account");
+        btnCreateAnAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCreateAnAccountActionPerformed(evt);
             }
         });
 
@@ -122,39 +114,40 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(38, 38, 38)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jlblPorukaName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))
-                                .addGap(47, 47, 47)
-                                .addComponent(jLabel5)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jlblPorukaUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jlblPorukaSurname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtSurname, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))
-                                .addGap(48, 48, 48)
-                                .addComponent(jLabel6)
-                                .addGap(19, 19, 19)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlblPorukaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlblPorukaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(38, 38, 38)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jlblPorukaName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))
+                                    .addGap(47, 47, 47)
+                                    .addComponent(jLabel5)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(19, 19, 19)
+                                            .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jlblPorukaUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jlblPorukaSurname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txtSurname, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))
+                                    .addGap(48, 48, 48)
+                                    .addComponent(jLabel6)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 891, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 891, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCreateAnAccount, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -175,27 +168,20 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jlblPorukaUsername)))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(36, 36, 36))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(42, 42, 42)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlblPorukaSurname)
-                            .addComponent(jlblPorukaPassword))
-                        .addContainerGap(45, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(36, 36, 36))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(txtSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlblPorukaPassword)
+                .addGap(30, 30, 30)
+                .addComponent(btnCreateAnAccount)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlblPorukaSurname)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Welcome to the sign up page. Please provide the following info:");
@@ -220,22 +206,18 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasswordActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCreateAnAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAnAccountActionPerformed
         try {
             String name = txtName.getText().trim();
             String surname = txtSurname.getText().trim();
             String username = txtUsername.getText().trim();
-            String password = txtPassword.getText().trim();
+            String password = new String(txtPasswordField.getPassword());
 
             Korisnik korisnik;
             try {
@@ -269,10 +251,10 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
         } catch (Exception ex) {
             Logger.getLogger(UnosTimova.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCreateAnAccountActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCreateAnAccount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -285,7 +267,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
     private javax.swing.JLabel jlblPorukaSurname;
     private javax.swing.JLabel jlblPorukaUsername;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPasswordField;
     private javax.swing.JTextField txtSurname;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
@@ -337,7 +319,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
             }
         }
 
-        char[] input = passwordField.getPassword();
+        char[] input = txtPasswordField.getPassword();
         if (!akoJeSifraDobra(input) == true) {
             jlblPorukaPassword.setText("Password doesn't contain all the necessery special charachters");
             jlblPorukaPassword.setForeground(Color.red);
@@ -356,9 +338,20 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ae) {
         String cmd = ae.getActionCommand();
-        if (hideAndReveal.equals(cmd)) {
-            passwordField.setEchoChar((char)0);
+        char[] passJP = txtPasswordField.getPassword();
+        
+        if (LogIn.equals(cmd)) {
+            try {
+                akoJeSifraDobra(passJP);
+            } catch (Exception ex) {
+                jlblPorukaPassword.setText(ex.getMessage());
+
+            }
         }
+
+        Arrays.fill(passJP, '0');
+        txtPasswordField.selectAll();
+        resetFocus();
     }
 
     //mora da sadrzi najmanje 8 karaktera, jedno veliko slovo, jedan znak
@@ -396,7 +389,7 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
     }
 
     private void resetFocus() {
-        passwordField.requestFocusInWindow();
+        txtPasswordField.requestFocusInWindow();
     }
 
     private Korisnik vratiKorisnika(String name, String surname, String username, String password) {
@@ -404,10 +397,9 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
     }
 
     private void srediTextField() {
-        char[] input = passwordField.getPassword();
+        char[] input = txtPasswordField.getPassword();
         Arrays.fill(input, '0');
-        passwordField.selectAll();
+        txtPasswordField.selectAll();
         resetFocus();
     }
-
 }

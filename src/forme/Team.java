@@ -153,12 +153,20 @@ public class Team extends javax.swing.JDialog {
     }//GEN-LAST:event_btnUnosNovogTimaActionPerformed
 
     private void btnIzmeniTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniTimActionPerformed
-        try {
-            IzmenaTimova it = new IzmenaTimova(new JFrame(), true);
-            it.setLocationRelativeTo(null);
-            it.setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(MasterForma.class.getName()).log(Level.SEVERE, null, ex);
+        int row = tabelaTeam.getSelectedRow();
+        if (row != -1) {
+            try {
+                IzmenaTimova it = new IzmenaTimova(new JFrame(), true);
+                TeamTable tt = (TeamTable) tabelaTeam.getModel();
+                it.postaviVrednost(tt.vratiSelektovanTim(row));
+                it.setLocationRelativeTo(null);
+                it.setVisible(true);
+            } catch (Exception ex) {
+                Logger.getLogger(MasterForma.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showConfirmDialog(this, "No Team have been selected for changing. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_btnIzmeniTimActionPerformed
 
@@ -176,7 +184,7 @@ public class Team extends javax.swing.JDialog {
             if (reply == JOptionPane.YES_OPTION) {
                 TeamTable tt = (TeamTable) tabelaTeam.getModel();
                 Tim tim = tt.vratiSelektovanTim(row);
-                
+
                 BrisanjeTima bt = new BrisanjeTima(null, true);
                 bt.proslediTim(tim);
             } else {

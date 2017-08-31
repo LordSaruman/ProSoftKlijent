@@ -654,4 +654,8 @@ public class IzmenaTimova extends javax.swing.JDialog {
     private Tim vratiTim(String naziv, String trener, String menadzer, String sponzor, Region region, Lokacija lokacija, String igre, String novac) {
         return new Tim(idTima, naziv, trener, menadzer, sponzor, igre, gold, region, lokacija);
     }
+
+    void postaviVrednost(Tim vratiSelektovanTim) {
+        this.tim = vratiSelektovanTim;
+    }
 }
