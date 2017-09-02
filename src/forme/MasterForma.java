@@ -100,7 +100,6 @@ public class MasterForma extends javax.swing.JDialog {
         Unos = new javax.swing.JMenuItem();
         OAplikaciji = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
         LogOut = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -172,19 +171,6 @@ public class MasterForma extends javax.swing.JDialog {
 
         menuBar.add(OAplikaciji);
 
-        jMenu1.setText("Database Configuration");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
-            }
-        });
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
-            }
-        });
-        menuBar.add(jMenu1);
-
         LogOut.setText("Log Out");
         LogOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -248,20 +234,20 @@ public class MasterForma extends javax.swing.JDialog {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutActionPerformed
-//        int reply = JOptionPane.showConfirmDialog(this, "Do you really want to Log out?", "Info", JOptionPane.YES_NO_OPTION);
-//        if (reply == JOptionPane.YES_OPTION) {
+        int reply = JOptionPane.showConfirmDialog(this, "Do you really want to Log out?", "Info", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
 //            korisnik = GUIKontroler.getInstance().getTrenutnoUlogovani();
 //            String username = korisnik.getUsername();
-//            JOptionPane.showMessageDialog(this, "Goodbye " + username + " .", "Info", JOptionPane.INFORMATION_MESSAGE);
-//            GUIKontroler.getInstance().ugasiPocetnuFormu();
-//            try {
-//                GUIKontroler.getInstance().izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika(korisnik);
-//            } catch (Exception ex) {
-//                Logger.getLogger(MasterForma.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            //GUIKontroler.getInstance().vratiFormu();
-//            System.exit(0);
-//        }
+            JOptionPane.showMessageDialog(this, "Goodbye.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            GUIKontroler.getInstance().ugasiPocetnuFormu();
+            try {
+                GUIKontroler.getInstance().izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika(korisnik);
+            } catch (Exception ex) {
+                Logger.getLogger(MasterForma.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //GUIKontroler.getInstance().vratiFormu();
+            System.exit(0);
+        }
     }//GEN-LAST:event_LogOutActionPerformed
 
     private void LogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogOutMouseClicked
@@ -290,17 +276,6 @@ public class MasterForma extends javax.swing.JDialog {
         t.setLocationRelativeTo(null);
         t.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        
-    }//GEN-LAST:event_jMenu1ActionPerformed
-
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        DatabaseConfig dc = new DatabaseConfig(null, true);
-        dc.pack();
-        dc.setLocationRelativeTo(null);
-        dc.setVisible(true);
-    }//GEN-LAST:event_jMenu1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -357,7 +332,6 @@ public class MasterForma extends javax.swing.JDialog {
     private javax.swing.JMenuItem Unos;
     private javax.swing.JMenu UnosRezultata;
     private javax.swing.JMenuItem UnosTurnira;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuBar menuBar;

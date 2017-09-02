@@ -393,7 +393,16 @@ public class UnosTimova extends javax.swing.JDialog {
                 ServerskiOdgovor so = Komunikacija.getInstance().primiOdgovor();
                 if (so.getStatusZahteva() == StatusZahteva.USPESAN_ZAHTEV) {
                     JOptionPane.showMessageDialog(this, "Team has been successfully saved!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    setVisible(false);
+                    TeamTable tt = (TeamTable) tabelaUnosTimova.getModel();
+                    tt.osvezi();
+                    popuniTabelu();
+                    int reply = JOptionPane.showConfirmDialog(this, "Do you want to insert new Team? If not, you will be directed to previous menu.", "Info", JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        //nista
+                    } else {
+                        dispose();
+                        setVisible(false);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Team has not been saved.", "Error", JOptionPane.ERROR_MESSAGE);
                     invalidate();

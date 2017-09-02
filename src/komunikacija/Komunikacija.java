@@ -48,9 +48,7 @@ public class Komunikacija {
         try {
             ObjectInputStream ois = new ObjectInputStream(s.getInputStream());
             so = (ServerskiOdgovor) ois.readObject();
-        } catch (IOException ex) {
-            Logger.getLogger(Komunikacija.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Komunikacija.class.getName()).log(Level.SEVERE, null, ex);
         }
 

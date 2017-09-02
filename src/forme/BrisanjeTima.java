@@ -12,6 +12,7 @@ import operacije.Operacija;
 import table.model.TeamTable;
 import transfer.KlijentskiZahtev;
 import transfer.ServerskiOdgovor;
+import transfer.StatusZahteva;
 
 /**
  *
@@ -21,6 +22,7 @@ public class BrisanjeTima extends javax.swing.JDialog {
 
     Tim tim = null;
     TeamTable tt = null;
+
     /**
      * Creates new form BrisanjeTima
      */
@@ -94,25 +96,30 @@ public class BrisanjeTima extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        int rez = JOptionPane.showConfirmDialog(this, "Are You sure that you want to cancel?", "Info", JOptionPane.YES_NO_OPTION);
+        if (rez == JOptionPane.YES_OPTION) {
+            setVisible(false);
+            dispose();
+        }
         JOptionPane.showMessageDialog(this, "Changes have not been saved to Database.", "Info", JOptionPane.INFORMATION_MESSAGE);
-        dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajActionPerformed
         KlijentskiZahtev kz = new KlijentskiZahtev();
         kz.setOperacija(Operacija.OBRISI);
         kz.setParametar(tim);
-        
+
         Komunikacija.getInstance().posaljiZahtev(kz);
         ServerskiOdgovor so = Komunikacija.getInstance().primiOdgovor();
-        
-        boolean flag = (boolean) so.getOdgovor();
-        if (flag) {
+
+        if (so.getStatusZahteva() == StatusZahteva.USPESAN_ZAHTEV) {
             tt.izbaciTim(tim);
             JOptionPane.showMessageDialog(this, "Team has been deleted from Database.", "Info", JOptionPane.INFORMATION_MESSAGE);
             return;
+        } else {
+            JOptionPane.showMessageDialog(this, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-        JOptionPane.showMessageDialog(this, "Team has been deleted from Database.", "Info", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnSacuvajActionPerformed
 
     /**

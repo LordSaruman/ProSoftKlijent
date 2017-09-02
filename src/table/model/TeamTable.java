@@ -43,13 +43,15 @@ public class TeamTable extends AbstractTableModel {
             case 2:
                 return tim.getMenadzer();
             case 3:
-                return tim.getIgre();
+                return tim.getSponzor();
             case 4:
-                return tim.getZaradjenNovac();
+                return tim.getIgre();
             case 5:
-                return tim.getRegion();
+                return tim.getZaradjenNovac();
             case 6:
-                return tim.getLokacije();
+                return tim.getRegion().getNazivRegiona();
+            case 7:
+                return tim.getLokacije().getNazivLokacije();
 
             default:
                 return "N/A";
@@ -67,6 +69,10 @@ public class TeamTable extends AbstractTableModel {
 
     public void izbaciTim(Tim tim) {
         spisakTimova.remove(tim);
+        fireTableDataChanged();
+    }
+
+    public void osvezi() {
         fireTableDataChanged();
     }
 }

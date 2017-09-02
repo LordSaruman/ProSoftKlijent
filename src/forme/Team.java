@@ -14,6 +14,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import kontroler.GUIKontroler;
+import nit.team.NitTeam;
 import table.model.TeamTable;
 
 /**
@@ -29,7 +30,8 @@ public class Team extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         srediTextFieldSignedIn();
-        popuniTabelu();
+        NitTeam nt = new NitTeam(this);
+        nt.start();
     }
 
     /**
@@ -237,7 +239,7 @@ public class Team extends javax.swing.JDialog {
         }
     }
 
-    private void popuniTabelu() {
+    public void popuniTabelu() {
         ArrayList<Tim> spisakTimova = new ArrayList<>();
         try {
             ArrayList<OpstiDomenskiObjekat> list = GUIKontroler.getInstance().vratiListu(new Tim());
@@ -250,4 +252,8 @@ public class Team extends javax.swing.JDialog {
             Logger.getLogger(UnosTimova.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+//
+//    void popuniTabeluTeam() {
+//        popuniTabelu();
+//    }
 }

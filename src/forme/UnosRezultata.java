@@ -67,6 +67,7 @@ public class UnosRezultata extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaRezultat = new javax.swing.JTable();
         btnSacuvajIzmenjen = new javax.swing.JButton();
+        btnDeleteFromTable = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtSignedUser = new javax.swing.JTextField();
         panelTurnir = new javax.swing.JPanel();
@@ -172,6 +173,13 @@ public class UnosRezultata extends javax.swing.JDialog {
             }
         });
 
+        btnDeleteFromTable.setText("Delete from table");
+        btnDeleteFromTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteFromTableActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -184,6 +192,8 @@ public class UnosRezultata extends javax.swing.JDialog {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnDeleteFromTable)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSacuvajIzmenjen))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -192,7 +202,9 @@ public class UnosRezultata extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(btnSacuvajIzmenjen)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSacuvajIzmenjen)
+                    .addComponent(btnDeleteFromTable))
                 .addContainerGap())
         );
 
@@ -339,33 +351,33 @@ public class UnosRezultata extends javax.swing.JDialog {
 
     private void btnSacuvajRezultatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajRezultatActionPerformed
         boolean validnaForma = true;
-        if (txtRezultat.getText().isEmpty() ) {
+        if (txtRezultat.getText().isEmpty()) {
             jlblPorukaRezultat.setText("Field for result is empty.");
             jlblPorukaRezultat.setForeground(Color.red);
             validnaForma = false;
-        }else{
+        } else {
             jlblPorukaRezultat.setText("");
         }
-        
+
         if (validnaForma) {
             try {
                 Tim tim = (Tim) comboTeam.getSelectedItem();
                 Turnir turnir = (Turnir) comboTurnir.getSelectedItem();
                 String rezultat = txtRezultat.getText();
-                
+
                 Rezultat rez = new Rezultat();
                 rez.setTim(tim);
                 rez.setTurnir(turnir);
                 rez.setRezultat(rezultat);
                 rez.setKorisnik(korisnik);
-                
+
                 RezultatiTabelModel rezultatiTabelModel = (RezultatiTabelModel) tabelaRezultat.getModel();
                 rezultatiTabelModel.dodajNoviRezultat(rez);
                 JOptionPane.showMessageDialog(null, "Successfully added result.", "Info", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "You didn't provide info for result field on the form or you have some input errors.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -386,7 +398,29 @@ public class UnosRezultata extends javax.swing.JDialog {
         jlblPorukaRezultat.setText("");
     }//GEN-LAST:event_txtRezultatKeyPressed
 
+    private void btnDeleteFromTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteFromTableActionPerformed
+        int row = tabelaRezultat.getSelectedRow();
+        if (row != -1) {
+            int reply = JOptionPane.showConfirmDialog(this, "Do you really want to delete selected Result?", "Info", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                RezultatiTabelModel rezultatiTabelModel = (RezultatiTabelModel) tabelaRezultat.getModel();
+                boolean flag = rezultatiTabelModel.obrisiRezultat(row);
+                if (flag) {
+                    JOptionPane.showMessageDialog(this, "Result has been successfully been deleted from the table.", "Info", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }else{
+                    JOptionPane.showMessageDialog(this, "Something went wrong", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "You have not selected a Result. Try again.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+    }//GEN-LAST:event_btnDeleteFromTableActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeleteFromTable;
     private javax.swing.JButton btnSacuvajIzmenjen;
     private javax.swing.JButton btnSacuvajRezultat;
     private javax.swing.JComboBox comboTeam;
@@ -465,7 +499,7 @@ public class UnosRezultata extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         try {
             TabelaRezultatTurnir trr = new TabelaRezultatTurnir(GUIKontroler.getInstance().vratiListu(new Turnir()));
             tabelaTurnir.setModel(trr);

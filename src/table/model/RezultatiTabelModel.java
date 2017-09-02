@@ -81,4 +81,10 @@ public class RezultatiTabelModel extends AbstractTableModel {
         return spisakRezultata;
     }
 
+    public boolean obrisiRezultat(int row) {
+        spisakRezultata.remove(row);
+        fireTableDataChanged();
+        return true;
+    }
+
 }

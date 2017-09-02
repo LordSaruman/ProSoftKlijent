@@ -33,7 +33,6 @@ public class IzmenaTimova extends javax.swing.JDialog {
 
     private ArrayList<Region> listaR;
     private ArrayList<Lokacija> listaL;
-    private int idTima;
     private Tim tim;
     Double gold = 0.0;
 
@@ -398,7 +397,8 @@ public class IzmenaTimova extends javax.swing.JDialog {
 
     private void btnSacuvajTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajTimActionPerformed
 
-        String naziv = (String) comboNazivTima.getSelectedItem();
+        Tim tim1 = (Tim) comboNazivTima.getSelectedItem();
+        String naziv = tim1.getNaziv();
         String trener = txtFieldTrener.getText().trim();
         String menadzer = txtFieldMenadzer.getText().trim();
         String sponzor = txtFieldSponzor.getText().trim();
@@ -428,7 +428,7 @@ public class IzmenaTimova extends javax.swing.JDialog {
             }
 
             if (kreirajIIzvrsiValidaciju(naziv, trener, menadzer, sponzor, region, lokacija, igre, novac) == true) {
-                tim = vratiTim(naziv, trener, menadzer, sponzor, region, lokacija, igre, novac);
+                tim = vratiTim(naziv, trener, menadzer, sponzor, region, lokacija, igre, novac, tim1.getIdTima());
                 KlijentskiZahtev kz = new KlijentskiZahtev();
                 kz.setOperacija(Operacija.IZMENI);
                 kz.setParametar(tim);
@@ -678,12 +678,12 @@ public class IzmenaTimova extends javax.swing.JDialog {
             jlblIgreKojeTimIgraPoruka.setText("");
         }
 
-        for (Tim tim : listaTimova) {
-            if (tim.getNaziv().equals(naziv)) {
-                JOptionPane.showMessageDialog(this, "Team with given name already exist. Please, try another.", "Error", JOptionPane.ERROR_MESSAGE);
-                validnaForma = false;
-            }
-        }
+//        for (Tim tim : listaTimova) {
+//            if (!tim.getNaziv().equals(naziv)) {
+//                JOptionPane.showMessageDialog(this, "Team with given name doesn't exist.", "Error", JOptionPane.ERROR_MESSAGE);
+//                validnaForma = false;
+//            }
+//        }
 
         boolean prosao = true;
         for (int i = 0; i < novac.length(); i++) {
@@ -709,11 +709,25 @@ public class IzmenaTimova extends javax.swing.JDialog {
         return true;
     }
 
-    private Tim vratiTim(String naziv, String trener, String menadzer, String sponzor, Region region, Lokacija lokacija, String igre, String novac) {
+    private Tim vratiTim(String naziv, String trener, String menadzer, String sponzor, Region region, Lokacija lokacija, String igre, String novac, int idTima) {
         return new Tim(idTima, naziv, trener, menadzer, sponzor, igre, gold, region, lokacija);
     }
 
     void postaviVrednost(Tim vratiSelektovanTim) {
         this.tim = vratiSelektovanTim;
+        comboNazivTima.setSelectedItem(vratiSelektovanTim);
+        txtFieldTrener.setText(tim.getTrener());
+        txtFieldMenadzer.setText(tim.getMenadzer());
+        txtFieldSponzor.setText(tim.getSponzor());
+        comboRegion.setSelectedItem(tim.getRegion());
+        comboLokacija.setSelectedItem(tim.getLokacije());
+        double novac = Double.parseDouble(tim.getZaradjenNovac()+"");
+        txtFieldZaradjenNovac.setText(novac+"");
+        if (tim.getIgre().contains("CSGO")) {
+            jcbCSGO.setSelected(true);
+        }
+        if (tim.getIgre().contains("Dota2")) {
+            jcbDota2.setSelected(true);
+        }
     }
 }
