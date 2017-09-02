@@ -85,9 +85,27 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
 
         jLabel3.setText("Name:");
 
+        txtName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNameKeyPressed(evt);
+            }
+        });
+
         jLabel4.setText("Surname:");
 
+        txtSurname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSurnameKeyPressed(evt);
+            }
+        });
+
         jLabel5.setText("Username:");
+
+        txtUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsernameKeyPressed(evt);
+            }
+        });
 
         jLabel6.setText("Password:");
 
@@ -105,6 +123,12 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
         jlblPorukaUsername.setForeground(new java.awt.Color(255, 0, 51));
 
         jlblPorukaPassword.setForeground(new java.awt.Color(255, 0, 51));
+
+        txtPasswordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordFieldKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -252,6 +276,22 @@ public class SignUp extends javax.swing.JDialog implements ActionListener {
             Logger.getLogger(UnosTimova.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnCreateAnAccountActionPerformed
+
+    private void txtNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameKeyPressed
+        jlblPorukaName.setText("");
+    }//GEN-LAST:event_txtNameKeyPressed
+
+    private void txtUsernameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyPressed
+        jlblPorukaUsername.setText("");
+    }//GEN-LAST:event_txtUsernameKeyPressed
+
+    private void txtSurnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSurnameKeyPressed
+        jlblPorukaSurname.setText("");
+    }//GEN-LAST:event_txtSurnameKeyPressed
+
+    private void txtPasswordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordFieldKeyPressed
+        jlblPorukaPassword.setText("");
+    }//GEN-LAST:event_txtPasswordFieldKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateAnAccount;

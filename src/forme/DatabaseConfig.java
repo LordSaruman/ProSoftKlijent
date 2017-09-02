@@ -37,6 +37,8 @@ public class DatabaseConfig extends javax.swing.JDialog {
         txtIPAddress = new javax.swing.JTextField();
         txtPort = new javax.swing.JTextField();
         btnClose = new javax.swing.JButton();
+        jlblIPAddress = new javax.swing.JLabel();
+        jlblPort = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] Database Configuration");
@@ -46,6 +48,18 @@ public class DatabaseConfig extends javax.swing.JDialog {
         jLabel1.setText("IP Address:");
 
         jLabel2.setText("Port:");
+
+        txtIPAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIPAddressKeyPressed(evt);
+            }
+        });
+
+        txtPort.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPortKeyPressed(evt);
+            }
+        });
 
         btnClose.setText("Close");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
@@ -58,6 +72,12 @@ public class DatabaseConfig extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(336, Short.MAX_VALUE)
+                .addComponent(btnSaveConfig)
+                .addGap(18, 18, 18)
+                .addComponent(btnClose)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,15 +85,12 @@ public class DatabaseConfig extends javax.swing.JDialog {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtIPAddress)
-                    .addComponent(txtPort, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
+                    .addComponent(jlblPort, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jlblIPAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtIPAddress)
+                        .addComponent(txtPort, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(239, Short.MAX_VALUE)
-                .addComponent(btnSaveConfig)
-                .addGap(18, 18, 18)
-                .addComponent(btnClose)
-                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,11 +99,15 @@ public class DatabaseConfig extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtIPAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlblIPAddress)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlblPort)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSaveConfig)
                     .addComponent(btnClose))
@@ -102,6 +123,14 @@ public class DatabaseConfig extends javax.swing.JDialog {
            dispose();
         }
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void txtIPAddressKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIPAddressKeyPressed
+        jlblIPAddress.setText("");
+    }//GEN-LAST:event_txtIPAddressKeyPressed
+
+    private void txtPortKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPortKeyPressed
+        jlblPort.setText("");
+    }//GEN-LAST:event_txtPortKeyPressed
 
     /**
      * @param args the command line arguments
@@ -150,6 +179,8 @@ public class DatabaseConfig extends javax.swing.JDialog {
     private javax.swing.JButton btnSaveConfig;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jlblIPAddress;
+    private javax.swing.JLabel jlblPort;
     private javax.swing.JTextField txtIPAddress;
     private javax.swing.JTextField txtPort;
     // End of variables declaration//GEN-END:variables

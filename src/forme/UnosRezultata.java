@@ -93,6 +93,12 @@ public class UnosRezultata extends javax.swing.JDialog {
 
         jLabel4.setText("Enter result:");
 
+        txtRezultat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRezultatKeyPressed(evt);
+            }
+        });
+
         btnSacuvajRezultat.setText("Save a result");
         btnSacuvajRezultat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,7 +165,7 @@ public class UnosRezultata extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tabelaRezultat);
 
-        btnSacuvajIzmenjen.setText("Save a changed result");
+        btnSacuvajIzmenjen.setText("Save a result in Database");
         btnSacuvajIzmenjen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSacuvajIzmenjenActionPerformed(evt);
@@ -172,11 +178,13 @@ public class UnosRezultata extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSacuvajIzmenjen))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSacuvajIzmenjen))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -330,21 +338,36 @@ public class UnosRezultata extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSacuvajRezultatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajRezultatActionPerformed
-        try {
-            Tim tim = (Tim) comboTeam.getSelectedItem();
-            Turnir turnir = (Turnir) comboTurnir.getSelectedItem();
-            String rezultat = txtRezultat.getText();
-
-            Rezultat rez = new Rezultat();
-            rez.setTim(tim);
-            rez.setTurnir(turnir);
-            rez.setRezultat(rezultat);
-            rez.setKorisnik(korisnik);
-
-            RezultatiTabelModel rezultatiTabelModel = (RezultatiTabelModel) tabelaRezultat.getModel();
-            rezultatiTabelModel.dodajNoviRezultat(rez);
-            JOptionPane.showMessageDialog(null, "Uspesno sacuvani rezultati");
-        } catch (Exception e) {
+        boolean validnaForma = true;
+        if (txtRezultat.getText().isEmpty() ) {
+            jlblPorukaRezultat.setText("Field for result is empty.");
+            jlblPorukaRezultat.setForeground(Color.red);
+            validnaForma = false;
+        }else{
+            jlblPorukaRezultat.setText("");
+        }
+        
+        if (validnaForma) {
+            try {
+                Tim tim = (Tim) comboTeam.getSelectedItem();
+                Turnir turnir = (Turnir) comboTurnir.getSelectedItem();
+                String rezultat = txtRezultat.getText();
+                
+                Rezultat rez = new Rezultat();
+                rez.setTim(tim);
+                rez.setTurnir(turnir);
+                rez.setRezultat(rezultat);
+                rez.setKorisnik(korisnik);
+                
+                RezultatiTabelModel rezultatiTabelModel = (RezultatiTabelModel) tabelaRezultat.getModel();
+                rezultatiTabelModel.dodajNoviRezultat(rez);
+                JOptionPane.showMessageDialog(null, "Successfully added result.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "You didn't provide info for result field on the form or you have some input errors.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
     }//GEN-LAST:event_btnSacuvajRezultatActionPerformed
 
@@ -352,10 +375,16 @@ public class UnosRezultata extends javax.swing.JDialog {
         RezultatiTabelModel rezultatiTabelModel = (RezultatiTabelModel) tabelaRezultat.getModel();
         try {
             GUIKontroler.getInstance().sacuvajListuRezultata(rezultatiTabelModel.getSpisakRezultata());
+            JOptionPane.showMessageDialog(this, "You have successfully saved a result in Database.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            return;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btnSacuvajIzmenjenActionPerformed
+
+    private void txtRezultatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRezultatKeyPressed
+        jlblPorukaRezultat.setText("");
+    }//GEN-LAST:event_txtRezultatKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSacuvajIzmenjen;
@@ -416,7 +445,8 @@ public class UnosRezultata extends javax.swing.JDialog {
 
     private void postaviKorisnika() {
         korisnik = new Korisnik();
-        korisnik.setUsername(GUIKontroler.getInstance().postaviUlogovanogKorisnika());
+        //korisnik.setUsername(GUIKontroler.getInstance().postaviUlogovanogKorisnika());
+        korisnik = GUIKontroler.getInstance().getTrenutnoUlogovani();
     }
 
     private void popuniTabelu() {

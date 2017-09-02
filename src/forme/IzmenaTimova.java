@@ -104,9 +104,27 @@ public class IzmenaTimova extends javax.swing.JDialog {
 
         jLabel4.setText("Coach:");
 
+        txtFieldTrener.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFieldTrenerKeyPressed(evt);
+            }
+        });
+
+        txtFieldSponzor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFieldSponzorKeyPressed(evt);
+            }
+        });
+
         jLabel5.setText("Sponsor:");
 
         jLabel6.setText("Earned money:");
+
+        txtFieldZaradjenNovac.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFieldZaradjenNovacKeyPressed(evt);
+            }
+        });
 
         btnSacuvajTim.setText("Save the team");
         btnSacuvajTim.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +134,12 @@ public class IzmenaTimova extends javax.swing.JDialog {
         });
 
         jLabel13.setText("Manager:");
+
+        txtFieldMenadzer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFieldMenadzerKeyPressed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Games that team plays\n"));
 
@@ -175,6 +199,12 @@ public class IzmenaTimova extends javax.swing.JDialog {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("New Team Name"));
 
         checkBoxNewName.setText("New name:");
+
+        txtNewName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNewNameKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -486,6 +516,26 @@ public class IzmenaTimova extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(this, "No changes have been made", "Success", JOptionPane.INFORMATION_MESSAGE);
         dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtFieldTrenerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldTrenerKeyPressed
+        jlblTrenerPoruka.setText("");
+    }//GEN-LAST:event_txtFieldTrenerKeyPressed
+
+    private void txtFieldMenadzerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldMenadzerKeyPressed
+        jlbMenadzerPoruka.setText("");
+    }//GEN-LAST:event_txtFieldMenadzerKeyPressed
+
+    private void txtFieldSponzorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldSponzorKeyPressed
+        jlblSponzorPoruka.setText("");
+    }//GEN-LAST:event_txtFieldSponzorKeyPressed
+
+    private void txtFieldZaradjenNovacKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldZaradjenNovacKeyPressed
+        jlblZaradjenNovacPoruka.setText("");
+    }//GEN-LAST:event_txtFieldZaradjenNovacKeyPressed
+
+    private void txtNewNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNewNameKeyPressed
+        jlblNewTeam.setText("");
+    }//GEN-LAST:event_txtNewNameKeyPressed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;

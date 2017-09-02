@@ -257,8 +257,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtFieldTrener">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFieldTrenerKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtFieldSponzor">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFieldSponzorKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -271,6 +277,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtFieldZaradjenNovac">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFieldZaradjenNovacKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSacuvajTim">
           <Properties>
@@ -286,6 +295,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtFieldMenadzer">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFieldMenadzerKeyPressed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Properties>
@@ -457,6 +469,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNewName">
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNewNameKeyPressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jlblNewTeam">
             </Component>
