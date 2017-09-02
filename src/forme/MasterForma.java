@@ -28,13 +28,20 @@ import kontroler.GUIKontroler;
 public class MasterForma extends javax.swing.JDialog {
 
     private static MasterForma instance;
+
     private Korisnik korisnik;
+    public static boolean flag = true;
 
     public static MasterForma getInstance() {
         if (instance == null) {
             instance = new MasterForma(new javax.swing.JFrame(), true);
+            postaviFlag();
         }
         return instance;
+    }
+
+    private static void postaviFlag() {
+        flag = false;
     }
 
     /**
@@ -82,10 +89,6 @@ public class MasterForma extends javax.swing.JDialog {
 
         menuBar = new javax.swing.JMenuBar();
         AdministracijaTimova = new javax.swing.JMenu();
-        UnosTimova = new javax.swing.JMenuItem();
-        IzmenaTimova = new javax.swing.JMenuItem();
-        BrisanjeTimova = new javax.swing.JMenuItem();
-        PretragaTimova = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         AdministracijaTurnira = new javax.swing.JMenu();
         UnosTurnira = new javax.swing.JMenuItem();
@@ -97,48 +100,14 @@ public class MasterForma extends javax.swing.JDialog {
         Unos = new javax.swing.JMenuItem();
         OAplikaciji = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
         LogOut = new javax.swing.JMenu();
-        Settings = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("[CSGO] Main Menu");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(getMaximumSize());
 
         AdministracijaTimova.setText("Team Administration");
-
-        UnosTimova.setText("Insert Team");
-        UnosTimova.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UnosTimovaActionPerformed(evt);
-            }
-        });
-        AdministracijaTimova.add(UnosTimova);
-
-        IzmenaTimova.setText("Change a Team");
-        IzmenaTimova.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IzmenaTimovaActionPerformed(evt);
-            }
-        });
-        AdministracijaTimova.add(IzmenaTimova);
-
-        BrisanjeTimova.setText("Delete a Team");
-        BrisanjeTimova.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BrisanjeTimovaActionPerformed(evt);
-            }
-        });
-        AdministracijaTimova.add(BrisanjeTimova);
-
-        PretragaTimova.setText("Search Teams");
-        PretragaTimova.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PretragaTimovaActionPerformed(evt);
-            }
-        });
-        AdministracijaTimova.add(PretragaTimova);
 
         jMenuItem2.setText("Team");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -203,6 +172,19 @@ public class MasterForma extends javax.swing.JDialog {
 
         menuBar.add(OAplikaciji);
 
+        jMenu1.setText("Database Configuration");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+        menuBar.add(jMenu1);
+
         LogOut.setText("Log Out");
         LogOut.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -216,13 +198,6 @@ public class MasterForma extends javax.swing.JDialog {
         });
         menuBar.add(LogOut);
 
-        Settings.setText("Settings");
-
-        jMenuItem3.setText("Database Configuration");
-        Settings.add(jMenuItem3);
-
-        menuBar.add(Settings);
-
         setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -233,38 +208,11 @@ public class MasterForma extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 501, Short.MAX_VALUE)
+            .addGap(0, 503, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void UnosTimovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnosTimovaActionPerformed
-        try {
-            UnosTimova ut = new UnosTimova(new JFrame(), true, true);
-            ut.setLocationRelativeTo(null);
-            ut.setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(MasterForma.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_UnosTimovaActionPerformed
-
-    private void IzmenaTimovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IzmenaTimovaActionPerformed
-        try {
-            IzmenaTimova it = new IzmenaTimova(new JFrame(), true);
-            it.setLocationRelativeTo(null);
-            it.setVisible(true);
-        } catch (Exception ex) {
-            Logger.getLogger(MasterForma.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_IzmenaTimovaActionPerformed
-
-    private void PretragaTimovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PretragaTimovaActionPerformed
-        JDialog dialog = new PretrragaTimova(null, true);
-        dialog.pack();
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
-    }//GEN-LAST:event_PretragaTimovaActionPerformed
 
     private void UnosRezultataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnosRezultataActionPerformed
         try {
@@ -288,10 +236,6 @@ public class MasterForma extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_UnosActionPerformed
 
-    private void BrisanjeTimovaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrisanjeTimovaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BrisanjeTimovaActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         try {
             JDialog dialog = new OAplikaciji(null, true);
@@ -304,31 +248,40 @@ public class MasterForma extends javax.swing.JDialog {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void LogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutActionPerformed
-        int reply = JOptionPane.showConfirmDialog(this, "Do you really want to Log out?", "Info", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-            korisnik = GUIKontroler.getInstance().getTrenutnoUlogovani();
-            JOptionPane.showMessageDialog(this, "Goodbye.", "Info", JOptionPane.INFORMATION_MESSAGE);
-            GUIKontroler.getInstance().ugasiPocetnuFormu();
-            GUIKontroler.getInstance().izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika(korisnik);
-            GUIKontroler.getInstance().vratiFormu();
-        } else {
-            System.exit(0);
-        }
+//        int reply = JOptionPane.showConfirmDialog(this, "Do you really want to Log out?", "Info", JOptionPane.YES_NO_OPTION);
+//        if (reply == JOptionPane.YES_OPTION) {
+//            korisnik = GUIKontroler.getInstance().getTrenutnoUlogovani();
+//            String username = korisnik.getUsername();
+//            JOptionPane.showMessageDialog(this, "Goodbye " + username + " .", "Info", JOptionPane.INFORMATION_MESSAGE);
+//            GUIKontroler.getInstance().ugasiPocetnuFormu();
+//            try {
+//                GUIKontroler.getInstance().izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika(korisnik);
+//            } catch (Exception ex) {
+//                Logger.getLogger(MasterForma.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            //GUIKontroler.getInstance().vratiFormu();
+//            System.exit(0);
+//        }
     }//GEN-LAST:event_LogOutActionPerformed
 
     private void LogOutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogOutMouseClicked
         int reply = JOptionPane.showConfirmDialog(this, "Do you really want to Log out?", "Info", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
+            korisnik = GUIKontroler.getInstance().getTrenutnoUlogovani();
             JOptionPane.showMessageDialog(this, "Goodbye.", "Info", JOptionPane.INFORMATION_MESSAGE);
-            GUIKontroler.getInstance().izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika(null);
-            GUIKontroler.getInstance().ugasiLoginFormu();
-            GUIKontroler.getInstance().ugasiMasterFormu();
-            GUIKontroler.getInstance().vratiFormu();
+            try {
+                GUIKontroler.getInstance().izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika(korisnik);
+            } catch (Exception ex) {
+                Logger.getLogger(MasterForma.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //GUIKontroler.getInstance().ugasiMasterFormu();
+            //GUIKontroler.getInstance().vratiFormu();
+            System.exit(0);
         }
     }//GEN-LAST:event_LogOutMouseClicked
 
     private void tournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tournamentActionPerformed
-        
+
     }//GEN-LAST:event_tournamentActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -337,6 +290,17 @@ public class MasterForma extends javax.swing.JDialog {
         t.setLocationRelativeTo(null);
         t.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        DatabaseConfig dc = new DatabaseConfig(null, true);
+        dc.pack();
+        dc.setLocationRelativeTo(null);
+        dc.setVisible(true);
+    }//GEN-LAST:event_jMenu1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -385,22 +349,17 @@ public class MasterForma extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu AdministracijaTimova;
     private javax.swing.JMenu AdministracijaTurnira;
-    private javax.swing.JMenuItem BrisanjeTimova;
     private javax.swing.JMenuItem BrisanjeTurnira;
-    private javax.swing.JMenuItem IzmenaTimova;
     private javax.swing.JMenuItem IzmenaTurnira;
     private javax.swing.JMenu LogOut;
     private javax.swing.JMenu OAplikaciji;
-    private javax.swing.JMenuItem PretragaTimova;
     private javax.swing.JMenuItem PretragaTurnira;
-    private javax.swing.JMenu Settings;
     private javax.swing.JMenuItem Unos;
     private javax.swing.JMenu UnosRezultata;
-    private javax.swing.JMenuItem UnosTimova;
     private javax.swing.JMenuItem UnosTurnira;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem tournament;
     // End of variables declaration//GEN-END:variables
@@ -421,7 +380,10 @@ public class MasterForma extends javax.swing.JDialog {
     }
 
     private void srediPoziv() {
-        String korisnikUl = GUIKontroler.getInstance().postaviUlogovanogKorisnika();
-        JOptionPane.showMessageDialog(this, "Welcome " + korisnikUl, "Info", JOptionPane.INFORMATION_MESSAGE);
+        if (flag == true) {
+            String korisnikUl = GUIKontroler.getInstance().postaviUlogovanogKorisnika();
+            JOptionPane.showMessageDialog(this, "Welcome " + korisnikUl, "Info", JOptionPane.INFORMATION_MESSAGE);
+            flag = false;
+        }
     }
 }

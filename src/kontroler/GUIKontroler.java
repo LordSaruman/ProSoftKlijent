@@ -8,7 +8,6 @@ package kontroler;
 import domen.Korisnik;
 import domen.OpstiDomenskiObjekat;
 import domen.Tim;
-import forme.LoginForma;
 import forme.MasterForma;
 import forme.PocetnaForma;
 import java.util.ArrayList;
@@ -49,7 +48,6 @@ public class GUIKontroler {
     }
 
     private static PocetnaForma pocetnaForma;
-    private static LoginForma loginForma;
     private static MasterForma masterForma;
 
     public void postaviInstancuForme(JFrame pocetna) {
@@ -62,10 +60,6 @@ public class GUIKontroler {
 
     public void vratiFormu() {
         pocetnaForma.setVisible(true);
-    }
-
-    public void ugasiLoginFormu() {
-        loginForma.setVisible(false);
     }
 
     public void ugasiMasterFormu() {
@@ -94,6 +88,7 @@ public class GUIKontroler {
                 if (!listaUlogovanihKorisnika.contains(korisnik)) {
                     listaUlogovanihKorisnika.add(korisnik);
                 }
+                trenutnoUlogovani = korisnik;
             }
         }
         try {
@@ -198,8 +193,9 @@ public class GUIKontroler {
         }
     }
 
-    public void izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika(Korisnik korisnik) {
+    public void izbrisiUlogovanogKorisnikaIzListeAktivnihKorisnika(Korisnik korisnik) throws Exception {
         listaUlogovanihKorisnika.remove(korisnik);
+        posaljiListuUlogovanihKorisnika();
     }
 
     public Korisnik getTrenutnoUlogovani() {

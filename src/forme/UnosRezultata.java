@@ -10,6 +10,7 @@ import domen.OpstiDomenskiObjekat;
 import domen.Rezultat;
 import domen.Tim;
 import domen.Turnir;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -175,8 +176,7 @@ public class UnosRezultata extends javax.swing.JDialog {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSacuvajIzmenjen)
-                .addGap(0, 0, 0))
+                .addComponent(btnSacuvajIzmenjen))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,7 +260,8 @@ public class UnosRezultata extends javax.swing.JDialog {
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setPreferredSize(new java.awt.Dimension(0, 0));
+        jSeparator1.setBorder(javax.swing.BorderFactory.createMatteBorder(8, 8, 8, 8, new java.awt.Color(0, 0, 0)));
+        jSeparator1.setPreferredSize(new java.awt.Dimension(2, 2));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -437,7 +438,7 @@ public class UnosRezultata extends javax.swing.JDialog {
         
         try {
             TabelaRezultatTurnir trr = new TabelaRezultatTurnir(GUIKontroler.getInstance().vratiListu(new Turnir()));
-            tabelaRezultat.setModel(trr);
+            tabelaTurnir.setModel(trr);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

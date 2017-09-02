@@ -420,23 +420,23 @@ public class UnosTimova extends javax.swing.JDialog {
     }//GEN-LAST:event_jcbDota2ActionPerformed
 
     private void txtFieldNazivTimaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldNazivTimaKeyPressed
-        //txtFieldNazivTima.setText("");
+        jlblNazivTImaPoruka.setText("");
     }//GEN-LAST:event_txtFieldNazivTimaKeyPressed
 
     private void txtFieldTrenerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldTrenerKeyPressed
-        //txtFieldTrener.setText("");
+        jlblTrenerPoruka.setText("");
     }//GEN-LAST:event_txtFieldTrenerKeyPressed
 
     private void txtFieldMenadzerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldMenadzerKeyPressed
-        //txtFieldMenadzer.setText("");
+        jlbMenadzerPoruka.setText("");
     }//GEN-LAST:event_txtFieldMenadzerKeyPressed
 
     private void txtFieldSponzorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldSponzorKeyPressed
-        //txtFieldSponzor.setText("");
+        jlblSponzorPoruka.setText("");
     }//GEN-LAST:event_txtFieldSponzorKeyPressed
 
     private void txtFieldZaradjenNovacKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFieldZaradjenNovacKeyPressed
-        //txtFieldZaradjenNovac.setText("");
+        jlblZaradjenNovacPoruka.setText("");
     }//GEN-LAST:event_txtFieldZaradjenNovacKeyPressed
 
     private void comboRegionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboRegionActionPerformed

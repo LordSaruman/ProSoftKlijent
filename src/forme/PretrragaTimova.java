@@ -276,21 +276,26 @@ public class PretrragaTimova extends javax.swing.JDialog {
     }//GEN-LAST:event_btnManagerActionPerformed
 
     private void btnPretraziActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPretraziActionPerformed
-        int moneyFrom;
-        try {
-            moneyFrom = Integer.parseInt(txtZarNovacOd.getText().trim());
-        } catch (NumberFormatException exception) {
-            moneyFrom = -1;
-        }
-        int moneyTo;
-        try {
-            moneyTo = Integer.parseInt(txtZarNovDo.getText().trim());
-        } catch (NumberFormatException exception) {
-            moneyTo = -1;
-        }
+        if (txtZarNovacOd.getText().isEmpty() || txtZarNovDo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please provide both criteria (From - to) for search.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            int moneyFrom;
+            try {
+                moneyFrom = Integer.parseInt(txtZarNovacOd.getText().trim());
+            } catch (NumberFormatException exception) {
+                moneyFrom = -1;
+            }
+            int moneyTo;
+            try {
+                moneyTo = Integer.parseInt(txtZarNovDo.getText().trim());
+            } catch (NumberFormatException exception) {
+                moneyTo = -1;
+            }
 
-        TimoviTableModel tableModel = (TimoviTableModel) jTable1.getModel();
-        tableModel.filtirajTabelaPoZaradi(moneyFrom, moneyTo);
+            TimoviTableModel tableModel = (TimoviTableModel) jTable1.getModel();
+            tableModel.filtirajTabelaPoZaradi(moneyFrom, moneyTo);
+        }
     }//GEN-LAST:event_btnPretraziActionPerformed
 
     private void btnSponzorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSponzorActionPerformed
@@ -383,7 +388,6 @@ public class PretrragaTimova extends javax.swing.JDialog {
         TimoviTableModel tableModel = (TimoviTableModel) jTable1.getModel();
         tableModel.filtrirajPoNecemu(filter);
     }
-
 
     void obrisiFilter() {
         TimoviTableModel tableModel = (TimoviTableModel) jTable1.getModel();
