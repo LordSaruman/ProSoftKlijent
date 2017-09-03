@@ -35,6 +35,7 @@ public class GUIKontroler {
     private String imeIPrezime = "";
     private Korisnik korisnik;
     private Korisnik trenutnoUlogovani;
+    private String ulogovaniKorisnik;
 
     private GUIKontroler() {
         listaUlogovanihKorisnika = new ArrayList<>();
@@ -96,7 +97,7 @@ public class GUIKontroler {
         } catch (Exception ex) {
             Logger.getLogger(GUIKontroler.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        ulogovaniKorisnik = imeIPrezime;
         return imeIPrezime;
     }
 
@@ -200,6 +201,10 @@ public class GUIKontroler {
 
     public Korisnik getTrenutnoUlogovani() {
         return trenutnoUlogovani;
+    }
+
+    public String getUlogovaniKorisnik() {
+        return ulogovaniKorisnik;
     }
 
 }

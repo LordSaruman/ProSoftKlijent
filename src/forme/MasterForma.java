@@ -267,7 +267,6 @@ public class MasterForma extends javax.swing.JDialog {
     }//GEN-LAST:event_LogOutMouseClicked
 
     private void tournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tournamentActionPerformed
-
     }//GEN-LAST:event_tournamentActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed

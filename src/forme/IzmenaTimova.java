@@ -617,7 +617,7 @@ public class IzmenaTimova extends javax.swing.JDialog {
 
     private void srediTextFieldSignedIn() {
         if (txtFieldSignedUser.getText().isEmpty()) {
-            txtFieldSignedUser.setText(GUIKontroler.getInstance().postaviUlogovanogKorisnika());
+            txtFieldSignedUser.setText(GUIKontroler.getInstance().getUlogovaniKorisnik());
             txtFieldSignedUser.setEditable(false);
         }
     }
